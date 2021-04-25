@@ -70,6 +70,7 @@
     git:
       repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
       dest: /root/Cosmic_OverlayV2
+      force: yes
 
   - name: Install shelljs
     command:

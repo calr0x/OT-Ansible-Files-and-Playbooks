@@ -1,4 +1,6 @@
 ---
+- import_playbook: install_otnode.yml
+
 - name: Configure server to personal specifications
   hosts: otnodes
   remote_user: root
