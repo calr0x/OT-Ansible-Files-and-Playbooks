@@ -5,18 +5,36 @@
   gather_facts: no
 
   tasks:
-  - name: Configure firewall
+  - name: Add firewall rule 22
     ufw:
       rule: allow
       port: '22'
       state: enabled
 
-  - name: Update/Upgrade Ubuntu
+  - name: Add firewall rule 3000
+    ufw:
+      rule: allow
+      port: '3000'
+      state: enabled
+
+  - name: Add firewall rule 5278
+    ufw:
+      rule: allow
+      port: '5278'
+      state: enabled
+
+  - name: Add firewall rule 8900
+    ufw:
+      rule: allow
+      port: '8900'
+      state: enabled
+
+  - name: Update and upgrade Ubuntu
     apt:
       upgrade: full
       update_cache: yes
 
-  - name: Install initial applications
+  - name: Install initial applications (apt-transport-https, ca-certificates, curl, software-properties-common)
     apt:
       pkg:
       - apt-transport-https
@@ -24,7 +42,7 @@
       - curl
       - software-properties-common
 
-  - name: Add Docker gpg
+  - name: Add Docker repository gpg key
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
@@ -34,7 +52,7 @@
       repo: deb https://download.docker.com/linux/ubuntu focal stable
       state: present
 
-  - name: Update repository with Docker info and install Docker
+  - name: Update APT with Docker repository info and install Docker, nodejs, npm, jq, curl, zip, unzip, and git
     apt:
       pkg:
       - docker-ce
@@ -48,7 +66,7 @@
       update_cache: yes
       state: present
 
-  - name: Clone Cosmic Installer
+  - name: Clone Cosmic Overlay git repository
     git:
       repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
       dest: /root/Cosmic_OverlayV2
