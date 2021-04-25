@@ -1,0 +1,11 @@
+---
+- name: Update Cosmic_Overlay
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Clone Cosmic Overlay git repository
+      git:
+        repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
+        dest: /root/Cosmic_OverlayV2
+        update: yes

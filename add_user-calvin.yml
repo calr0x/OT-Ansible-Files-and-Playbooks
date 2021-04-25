@@ -1,9 +1,11 @@
 ---
-- name: Add and confgure user account info
+- name: Configure server to personal specifications
   hosts: otnodes
+  remote_user: root
+  gather_facts: no
 
   tasks:
-    - name: Create user account
+    - name: Create user account "calvin"
       user:
         name: calvin
         groups: sudo
@@ -12,9 +14,21 @@
         shell: /bin/bash
         password: $6$B7tTfwfHPOsOYtvn$AreqO9vixbPqVmwLhnz91QkbjMWVoMo2esuzavMe/yPygmAoqZNNVk1RnEHFdZ0AWm1s06b5RDjgk7tQsxnU61
 
-    - name: Add public authorized key to users .ssh/authorized_keys file
+    - name: Add public authorized key to calvin's .ssh/authorized_keys file
       authorized_key:
         user: calvin
         state: present
         manage_dir: yes
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4FzD761ks2npiD9BTxSfn0vfvGNZNs3TIXS9sohmIZy0j0A1WkzpY1S47WW4r2lOjtfD+rtHTWUgjgtJiRhDd1fhsD5LOfFKbo2weM2M+7LwH1AplbdgaGSW9LatdAKqQWmCuggBZf0GWTyR8NwHBTWGy95uGAWGKIWegqCdvdWJHs0arA/n/BaJHVZ6Yea8xFUuaef9arn+DNY1Jtw1jPBwHi7WfFpqkPA557bZq0MOsjzWC23Ofn6GlSAXDtgurcIy0tqhSK7LCpwAlxMS+3dOE0x9J4+MRGR5Ur29NcQKmxP2/UGU2UMZfz0l8PeH6JXMc/jSXGp2WF+d5zgzP calvin@GMDesktop
+
+    - name: Changing ssh port to 22022
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: '#Port 22'
+        replace: 'Port 22022'
+
+    - name: Changing PermitRootLogin to "no"
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: 'PermitRootLogin yes'
+        replace: 'PermitRootLogin no'

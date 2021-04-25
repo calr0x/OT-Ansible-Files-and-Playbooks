@@ -70,3 +70,23 @@
     git:
       repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
       dest: /root/Cosmic_OverlayV2
+
+  - name: Install shelljs
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: npm i shelljs
+
+  - name: Install express
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: npm i express
+
+  - name: Install node-cron
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: npm i node-cron
+
+  - name: Install forever
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: npm i forever -g
