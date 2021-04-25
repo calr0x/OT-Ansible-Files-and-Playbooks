@@ -1,0 +1,54 @@
+---
+- name: Configure Ubuntu and Install Cosmic Installer
+  hosts: otnodes
+  remote_user: root
+  gather_facts: no
+
+  tasks:
+  - name: Configure firewall
+    ufw:
+      rule: allow
+      port: '22'
+      state: enabled
+
+  - name: Update/Upgrade Ubuntu
+    apt:
+      upgrade: full
+      update_cache: yes
+
+  - name: Install initial applications
+    apt:
+      pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+
+  - name: Add Docker gpg
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Update repository with Docker info and install Docker
+    apt:
+      pkg:
+      - docker-ce
+      - nodejs
+      - npm
+      - jq
+      - curl
+      - zip
+      - unzip
+      - git
+      update_cache: yes
+      state: present
+
+  - name: Clone Cosmic Installer
+    git:
+      repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
+      dest: /root/Cosmic_OverlayV2

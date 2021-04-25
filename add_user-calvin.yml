@@ -1,0 +1,20 @@
+---
+- name: Add and confgure user account info
+  hosts: otnodes
+
+  tasks:
+    - name: Create user account
+      user:
+        name: calvin
+        groups: sudo
+        append: yes
+        create_home: yes
+        shell: /bin/bash
+        password: $6$B7tTfwfHPOsOYtvn$AreqO9vixbPqVmwLhnz91QkbjMWVoMo2esuzavMe/yPygmAoqZNNVk1RnEHFdZ0AWm1s06b5RDjgk7tQsxnU61
+
+    - name: Add public authorized key to users .ssh/authorized_keys file
+      authorized_key:
+        user: calvin
+        state: present
+        manage_dir: yes
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4FzD761ks2npiD9BTxSfn0vfvGNZNs3TIXS9sohmIZy0j0A1WkzpY1S47WW4r2lOjtfD+rtHTWUgjgtJiRhDd1fhsD5LOfFKbo2weM2M+7LwH1AplbdgaGSW9LatdAKqQWmCuggBZf0GWTyR8NwHBTWGy95uGAWGKIWegqCdvdWJHs0arA/n/BaJHVZ6Yea8xFUuaef9arn+DNY1Jtw1jPBwHi7WfFpqkPA557bZq0MOsjzWC23Ofn6GlSAXDtgurcIy0tqhSK7LCpwAlxMS+3dOE0x9J4+MRGR5Ur29NcQKmxP2/UGU2UMZfz0l8PeH6JXMc/jSXGp2WF+d5zgzP calvin@GMDesktop
