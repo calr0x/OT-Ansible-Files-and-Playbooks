@@ -1,0 +1,24 @@
+otnodes:
+  hosts:
+    replace_this_with_server1_domain_or_ip: #Server name or IP address
+      node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
+      op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
+      op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
+      mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
+      initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+
+    replace_this_with_server1_domain_or_ip: #Server name or IP address
+      node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
+      op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
+      op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
+      mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
+      initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+  vars:
+    dh_price_factor: 'GLOBALDHPRICEFACTOR'
+    dh_max_holding_time_in_minutes: 'GLOBALMAXHOLDINGTIME'
+    aws_region: 'GLOBALAWSREGION'
+    aws_access_key_id: 'GLOBALAWSACCESSKEY'
+    aws_secret_access_key: 'GLOBALAWSSECRETKEY'
+    aws_bucket_name: 'GLOBALAWSBUCKETNAME'
+    telegram_bot_token: 'GLOBALTELEGRAMBOTTOKEN'
+    telegram_chat_id: 'GLOBALTELEGRAMCHATID'
