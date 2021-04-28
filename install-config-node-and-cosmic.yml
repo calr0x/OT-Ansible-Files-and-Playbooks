@@ -1,6 +1,6 @@
 ---
 - name:
-  include: install-ubuntu-and-cosmic.yml
+  import_playbook: install-ubuntu-and-cosmic.yml
   
 - name: Configure servers node and Cosmic_Overlay settings files with local settings file
   hosts: all
