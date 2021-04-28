@@ -1,5 +1,5 @@
 # OT-Ansible-Files-and-Playbooks
-Playbooks and files to install, maintain, and install Origin Trail node software and Cosmic Overlay
+Playbooks and files to install, maintain, and install Origin Trail node software and Cosmic Overlay.
 
 1. ALL COMMANDS ASSUME YOU ARE LOGGED IN AS ROOT.
 2. cd
