@@ -1,0 +1,21 @@
+---
+- name: Update Ubuntu OS software
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Upgrading Ubuntu OS
+      apt:
+        upgrade: full
+        update_cache: yes
+
+    - name: check if a reboot is required
+      shell: "[ -f /var/run/reboot-required ]"
+      failed_when: False
+      register: reboot_required
+      changed_when: reboot_required.rc == 0
+      notify: reboot
+
+  handlers:
+    - name: reboot
+      command: /sbin/reboot
