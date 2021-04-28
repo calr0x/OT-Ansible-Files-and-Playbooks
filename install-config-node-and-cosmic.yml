@@ -1,7 +1,7 @@
 ---
 - name:
   import_playbook: install-ubuntu-and-cosmic.yml
-  
+
 - name: Configure servers node and Cosmic_Overlay settings files with local settings file
   hosts: all
   gather_facts: yes
@@ -19,7 +19,7 @@
 
   - name: Copy node config file to server
     copy:
-      src: ~/Ansible/data/node_config.json
+      src: ~/OT-Ansible-Files-and-Playbooks/data/node_config.json
       dest: /root/Cosmic_OverlayV2/configurations
       owner: root
       group: root
@@ -27,7 +27,7 @@
 
   - name: Copy overlay config file to server
     copy:
-      src: ~/Ansible/data/overlay_config.json
+      src: ~/OT-Ansible-Files-and-Playbooks/data/overlay_config.json
       dest: /root/Cosmic_OverlayV2/configurations
       owner: root
       group: root
