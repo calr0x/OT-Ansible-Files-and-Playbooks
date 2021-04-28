@@ -1,6 +1,9 @@
 # OT-Ansible-Files-and-Playbooks
 Playbooks and files to install, maintain, and install Origin Trail node software and Cosmic Overlay.
 
+
+** REQUIRES LINUX OS TO RUN. YOU NEED A LINUX OS THAT IS **NOT** USING A SERVER A NODE IS RUNNING ON. LOOK INTO VIRTUALBOX (https://www.virtualbox.org/) AS A WAY TO RUN LINUX ON YOUR DESKTOP OTHERWISE RENT A VPS SERVER TO USE THIS SOFTWARE. **
+
 1. ALL COMMANDS ASSUME YOU ARE LOGGED IN AS ROOT.
 2. cd
 3. apt update && apt install ansible
