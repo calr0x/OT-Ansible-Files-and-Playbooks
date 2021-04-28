@@ -3,7 +3,7 @@ Playbooks and files to install, maintain, and install Origin Trail node software
 
 1. ALL COMMANDS ASSUME YOU ARE LOGGED IN AS ROOT.
 2. cd
-3. apt-update && apt install ansible
+3. apt update && apt install ansible
 4. git clone https://github.com/calr0x/OT-Ansible-Files-and-Playbooks.git
 5. cd OT-Ansible-Files-and-Playbooks
 6. nano config-otnodes-and-cosmic.yml
