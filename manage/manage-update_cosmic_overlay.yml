@@ -6,7 +6,7 @@
   tasks:
     - name: Git pull Cosmic_Overlay files
       git:
-      repo: 'https://foosball.example.org/path/to/repo.git'
+      repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
       dest: /root/Cosmic_OverlayV2
       update: yes
       clone: yes
