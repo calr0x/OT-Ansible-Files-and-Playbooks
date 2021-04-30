@@ -45,7 +45,7 @@ Press <enter>
 ctrl-x (TO EXIT)
   
 10. rm /etc/ansible/hosts && cp config-otnodes-and-cosmic.yml /etc/ansible/hosts
-11. ansible-playbook install-config-node-and-cosmic.yml
+11. ansible-playbook install-complete.yml
 
 EVERYTHING IS NOW READY TO RUN COSMIC_OVERLAY!
 
