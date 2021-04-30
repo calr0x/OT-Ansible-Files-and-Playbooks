@@ -49,9 +49,13 @@ ctrl-x (TO EXIT)
 
 EVERYTHING IS NOW READY TO RUN COSMIC_OVERLAY!
 
+BE AWARE: IF YOU FOLLOW COSMIC'S DIRECTIONS (ON HIS SITE) WHEN YOU FINISH INSTALLING THE NODE YOU NORMALLY NEED TO MANUALLY START HIS SCRIPTS. THIS INSTALLER **DOES** START THOSE SCRIPTS FOR YOU. THEY ARE ALREADY RUNNING AT THIS POINT. :)
+
 13. Connect to each server in your preferred SSH client (Terminus/Putty/etc) as root.
 12. cd Cosmic_OverlayV2
 13. node start_overlay.js
 14. Choose "[1] - Install Menu"
 15. Choose "[1] - Install a new node"
 16. Follow any prompts.
+
+DONE!
