@@ -46,18 +46,20 @@ ctrl+o (TO SAVE)
 Press <enter>
 ctrl-x (TO EXIT)
   
-10. rm /etc/ansible/hosts && cp config-otnodes-and-cosmic.yml /etc/ansible/hosts
-11. ansible-playbook install-complete.yml
+10. apt install yamllist
+11. yamllint config-otnodes-and-cosmic.yml (LOOK FOR ANY ERRORS IN THE RESULTS OF THIS COMMAND. IF THERE RE ANY ERRORS CORRECT THE ERRORS BY RETURNING TO STEP 6.
+12. rm /etc/ansible/hosts && cp config-otnodes-and-cosmic.yml /etc/ansible/hosts
+13. ansible-playbook install-complete.yml
 
 EVERYTHING IS NOW READY TO RUN COSMIC_OVERLAY!
 
 BE AWARE: IF YOU PREVIOUSLY FOLLOWED COSMIC'S DIRECTIONS (ON HIS SITE) ON A PREVIOUS INSTALL WHEN YOU FINISHED INSTALLING THE NODE YOU WOULD NORMALLY NEED TO MANUALLY START HIS SCRIPTS. THIS INSTALLER **DOES** START THOSE SCRIPTS FOR YOU. THEY ARE ALREADY RUNNING AT THIS POINT. :)
 
-13. Connect to each server in your preferred SSH client (Terminus/Putty/etc) as root.
-12. cd Cosmic_OverlayV2
-13. node start_overlay.js
-14. Choose "[1] - Install Menu"
-15. Choose "[1] - Install a new node"
-16. Follow any prompts.
+14. Connect to each server in your preferred SSH client (Terminus/Putty/etc) as root.
+15. cd Cosmic_OverlayV2
+16. node start_overlay.js
+17. Choose "[1] - Install Menu"
+18. Choose "[1] - Install a new node"
+19. Follow any prompts.
 
 DONE!
