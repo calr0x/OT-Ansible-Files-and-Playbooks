@@ -1,0 +1,180 @@
+---
+- name: Configure Ubuntu and Install Cosmic Installer
+  hosts: otnodes
+  remote_user: root
+  gather_facts: yes
+
+  tasks:
+  - name: Add firewall rules to allow ports 22, 3000, 5278, and 8900
+    ufw:
+      rule: allow
+      port: '{{ item }}'
+      state: enabled
+    loop:
+      - '22'
+      - '3000'
+      - '5278'
+      - '8900'
+
+  - name: Update and upgrade Ubuntu
+    apt:
+      upgrade: full
+      update_cache: yes
+
+  - name: Install initial applications (apt-transport-https, ca-certificates, curl, software-properties-common)
+    apt:
+      pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+
+  - name: Add Docker repository gpg key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Update APT with Docker repository info and install Docker, nodejs, npm, jq, curl, zip, unzip, and git
+    apt:
+      pkg:
+      - docker-ce
+      - nodejs
+      - npm
+      - jq
+      - curl
+      - zip
+      - unzip
+      - git
+      update_cache: yes
+      state: present
+
+  - name: Clone Cosmic Overlay git repository
+    git:
+      repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
+      dest: /root/Cosmic_OverlayV2
+      force: yes
+
+  - name: Install shelljs
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: '{{ item }}'
+    loop:
+      - npm i shelljs
+      - npm i express
+      - npm i node-cron
+      - npm i forever -g
+
+  - name: Remove existing node config
+    file:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      state: absent
+
+  - name: Remove existing overlay config
+    file:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      state: absent
+
+  - name: Copy node config file to server
+    copy:
+      src: ~/OT-Ansible-Files-and-Playbooks/data/node_config.json
+      dest: /root/Cosmic_OverlayV2/configurations
+      owner: root
+      group: root
+      mode: '0600'
+
+  - name: Copy overlay config file to server
+    copy:
+      src: ~/OT-Ansible-Files-and-Playbooks/data/overlay_config.json
+      dest: /root/Cosmic_OverlayV2/configurations
+      owner: root
+      group: root
+      mode: '0600'
+
+  - name: Edit node config with IP address
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: IP_OF_YOUR_SERVER
+      replace: "{{ ansible_facts['default_ipv4']['address'] }}"
+
+  - name: Edit node config with initial deposit amount
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: INITIAL_DEPOSIT_AMOUNT_HERE
+      replace: "{{ initial_deposit_amount }}"
+
+  - name: Edit node config with operational wallet public key
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: PUBLIC_KEY_OF_YOUR_WALLET
+      replace: "{{ op_pub_key }}"
+
+  - name: Edit node config with operational wallet private key
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: PRIVATE_KEY_OF_YOUR_WALLET
+      replace: "{{ op_priv_key }}"
+
+  - name: Edit node config with management wallet public key
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: PUBLIC_KEY_OF_MANAGEMENT_WALLET
+      replace: "{{ mgmt_pub_key }}"
+
+  - name: Edit node config with dh_price_factor
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: DH_PRICE_FACTOR
+      replace: "{{ dh_price_factor }}"
+
+  - name: Edit node config with dh_max_holding_time_in_minutes
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: DH_HOLDING_TIME_MINUTES
+      replace: "{{ dh_max_holding_time_in_minutes }}"
+
+  - name: Edit cosmic overlay config with the node name
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      regexp: NODE_NAME_HERE
+      replace: "{{ node_name }}"
+
+  - name: Edit cosmic overlay config with the telegram bot token
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      regexp: BOT_TOKEN
+      replace: "{{ telegram_bot_token }}"
+
+  - name: Edit cosmic overlay config with the D m chat_id
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      regexp: TELEGRAM_CHAT_ID_HERE
+      replace: "{{ telegram_chat_id }}"
+
+  - name: Edit cosmic overlay config with the AWS region
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      regexp: AWS_REGION_HERE
+      replace: "{{ aws_region }}"
+
+  - name: Edit cosmic overlay config with the AWS access key
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      regexp: AWS_KEY_ID_HERE
+      replace: "{{ aws_access_key_id }}"
+
+  - name: Edit cosmic overlay config with the AWS secret access key
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      regexp: AWS_SECRET_ACCESS_KEY_HERE
+      replace: "{{ aws_secret_access_key }}"
+
+  - name: Edit cosmic overlay config with the AWS bucket name
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
+      regexp: AWS_BUCKET_HERE
+      replace: "{{ aws_bucket_name }}"
