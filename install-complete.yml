@@ -178,3 +178,17 @@
       path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
       regexp: AWS_BUCKET_HERE
       replace: "{{ aws_bucket_name }}"
+
+# Start Cosmic scripts
+
+  - name: Start Cosmic_Overlay scripts (notification, archive, awsbackup, ping, report, awsjob)
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: '{{ item }}'
+    loop:
+      - forever start notification.js
+      - forever start archive.js
+      - forever start awsbackup.js
+      - forever start ping.js
+      - forever start report.js
+      - forever start awsjob.js
