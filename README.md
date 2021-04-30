@@ -1,4 +1,6 @@
 # OT-Ansible-Files-and-Playbooks
+Now featuring NerdPro(TM) software!
+
 Playbooks and files to install, maintain, and install Origin Trail node software and Cosmic Overlay.
 
 
