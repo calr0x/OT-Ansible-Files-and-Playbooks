@@ -18,14 +18,14 @@ HINT:
 (4) SPACES **BEFORE** "REPLACE"
 (2) SPACES BETWEEN "NODE_NAME" AND "REPLACE" (5 TOTAL FROM LEFT EDGE.
 
-    replace_this_with_server1_domain_or_ip: #Exp. node1.server.com
+    replace_this_with_server1_domain_or_ip: #Exp. node1.server.com OR 23.34.45.56
       node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
       op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
       op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
       mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
       initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
  
-    replace_this_with_server1_domain_or_ip: #Exp. node2.server.com
+    replace_this_with_server1_domain_or_ip: #Exp. node2.server.com OR 23.34.45.57
       node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
       op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
       op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
