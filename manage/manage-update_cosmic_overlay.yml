@@ -6,7 +6,26 @@
   tasks:
     - name: Git pull Cosmic_Overlay files
       git:
-      repo: 'https://foosball.example.org/path/to/repo.git'
-      dest: /root/Cosmic_OverlayV2
-      update: yes
-      clone: yes
+        repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
+        dest: /root/Cosmic_OverlayV2
+        update: yes
+        force: yes
+        clone: yes
+
+    - name: Stop and start Cosmic_Overlay scripts (notification, archive, awsbackup, ping, report, awsjob)
+      command:
+        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+        cmd: '{{ item }}'
+      loop:
+        - forever stop notification.js
+        - forever stop archive.js
+        - forever stop awsbackup.js
+        - forever stop ping.js
+        - forever stop report.js
+        - forever stop awsjob.js
+        - forever start notification.js
+        - forever start archive.js
+        - forever start awsbackup.js
+        - forever start ping.js
+        - forever start report.js
+        - forever start awsjob.js
