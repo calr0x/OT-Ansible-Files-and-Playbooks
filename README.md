@@ -46,7 +46,7 @@ ctrl+o (TO SAVE)
 Press <enter>
 ctrl-x (TO EXIT)
   
-10. apt install yamllist
+10. apt install yamllint
 11. yamllint config-otnodes-and-cosmic.yml (LOOK FOR ANY ERRORS IN THE RESULTS OF THIS COMMAND. IF THERE RE ANY ERRORS CORRECT THE ERRORS BY RETURNING TO STEP 6.
 12. rm /etc/ansible/hosts && cp config-otnodes-and-cosmic.yml /etc/ansible/hosts
 13. ansible-playbook install-complete.yml
