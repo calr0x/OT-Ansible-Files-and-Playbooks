@@ -149,7 +149,7 @@
       regexp: BOT_TOKEN
       replace: "{{ telegram_bot_token }}"
 
-  - name: Edit cosmic overlay config with the D m chat_id
+  - name: Edit cosmic overlay config with the telegram chat_id
     replace:
       path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
       regexp: TELEGRAM_CHAT_ID_HERE
