@@ -1,60 +1,23 @@
-- name: Update servers node and Cosmic_Overlay settings files with local settings files
+- name: Update servers node and Cosmic_Overlay settings files with data from local settings files
   hosts: all
   gather_facts: yes
 
   tasks:
-  - name: Remove existing node config
-    file:
-      path: /root/Cosmic_OverlayV2/configurations/node_config.json
-      state: absent
-
   - name: Remove existing overlay config
     file:
       path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
       state: absent
-
-  - name: Copy node config file to server
-    copy:
-      src: ~/OT-Ansible-Files-and-Playbooks/data/node_config.json
-      dest: /root/Cosmic_OverlayV2/configurations
-      owner: root
-      group: root
-      mode: '0600'
 
   - name: Copy overlay config file from example
     command: 'cp example-overlay_config.json overlay_config.json'
     args:
       chdir: /root/Cosmic_OverlayV2/configurations/
 
-  - name: Edit node config with IP address
-    replace:
-      path: /root/Cosmic_OverlayV2/configurations/node_config.json
-      regexp: your external IP or domain name here
-      replace: "{{ ansible_facts['default_ipv4']['address'] }}"
-
-  - name: Edit node config with initial deposit amount
-    replace:
-      path: /root/Cosmic_OverlayV2/configurations/node_config.json
-      regexp: 'your initial deposit amount in TRAC with 18 decimals, 1 TRAC = 1000000000000000000 '
-      replace: "{{ initial_deposit_amount }}"
-
-  - name: Edit node config with operational wallet public key
-    replace:
-      path: /root/Cosmic_OverlayV2/configurations/node_config.json
-      regexp: your ethereum wallet address here
-      replace: "{{ op_pub_key }}"
-
-  - name: Edit node config with operational wallet private key
-    replace:
-      path: /root/Cosmic_OverlayV2/configurations/node_config.json
-      regexp: your ethereum wallet's private key here
-      replace: "{{ op_priv_key }}"
-
-  - name: Edit node config with management wallet public key
-    replace:
-      path: /root/Cosmic_OverlayV2/configurations/node_config.json
-      regexp: your ethereum management wallet public key here
-      replace: "{{ mgmt_pub_key }}"
+#  - name: Edit node config with IP address
+#    replace:
+#      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+#      regexp: your external IP or domain name here
+#      replace: "{{ ansible_facts['default_ipv4']['address'] }}"
 
   - name: Edit node config with dh_price_factor
     replace:
