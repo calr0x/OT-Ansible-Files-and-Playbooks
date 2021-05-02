@@ -1,0 +1,17 @@
+---
+- name: Stop Cosmic_Overlay notifications until a proper solution exists.
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Stop and start Cosmic_Overlay scripts (notification, archive, awsbackup, ping, report, awsjob)
+      command:
+        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+        cmd: '{{ item }}'
+      loop:
+        - forever start notification.js
+        - forever start archive.js
+        - forever start awsbackup.js
+        - forever start ping.js
+        - forever start report.js
+        - forever start awsjob.js
