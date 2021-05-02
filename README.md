@@ -1,5 +1,4 @@
 # OT-Ansible-Files-and-Playbooks
-Now featuring NerdPro(TM) software!
 
 This project install and configure Ubuntu, OriginTrail Node, and Cosmic Overlay, simultaneously on as many servers as you need. You can setup one, two, or *hundreds* of servers at the same time!
 
