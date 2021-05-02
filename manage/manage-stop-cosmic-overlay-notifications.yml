@@ -1,0 +1,10 @@
+---
+- name: Stop Cosmic_Overlay notifications until a proper solution exists.
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Stop Cosmic_Overlay notification script (notification)
+      command:
+        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+        cmd: 'forever stop notification.js'

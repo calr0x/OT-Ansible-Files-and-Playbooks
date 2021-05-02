@@ -23,3 +23,5 @@ otnodes:
     aws_bucket_name: 'GLOBALAWSBUCKETNAME'
     telegram_bot_token: 'GLOBALTELEGRAMBOTTOKEN'
     telegram_chat_id: 'GLOBALTELEGRAMCHATID'
+    aws_backup_frequency: 'GLOBALAWSBACKUPFREQUENCY'
+    telegram_daily_report_time: 'GLOBALTELEGRAMDAILYREPORTTIME'
