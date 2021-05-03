@@ -87,3 +87,20 @@
       path: /root/Cosmic_OverlayV2/configurations/overlay_config.json
       regexp: "0 0 * * 0"
       replace: "{{ aws_backup_frequency }}"
+
+  - name: Re-start OTNode Docker container
+    command:
+      chdir: /root/Cosmic_OverlayV2/
+      cmd: 'docker restart otnode'
+
+  - name: Re-start Cosmic_Overlay scripts (notification, archive, awsbackup, ping, report, awsjob)
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: '{{ item }}'
+    loop:
+      - forever restart notification.js
+      - forever restart archive.js
+      - forever restart awsbackup.js
+      - forever restart ping.js
+      - forever restart report.js
+      - forever restart awsjob.js
