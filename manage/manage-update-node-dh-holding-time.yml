@@ -1,0 +1,15 @@
+- name: Update servers node dh-holding-time
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Edit node config with dh_max_holding_time_in_minutes
+    replace:
+      path: /root/Cosmic_OverlayV2/configurations/node_config.json
+      regexp: '526000'
+      replace: "{{ dh_max_holding_time_in_minutes }}"
+
+  - name: Re-start OTNode Docker container
+    command:
+      chdir: /root/Cosmic_OverlayV2/
+      cmd: 'docker restart otnode'
