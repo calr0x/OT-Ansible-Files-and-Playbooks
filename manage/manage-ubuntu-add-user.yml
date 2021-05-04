@@ -38,6 +38,18 @@
         name: root
         password: !
 
+    - name: Changing PermitRootLogin to "no"
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: '#PasswordAuthentication yes'
+        replace: 'PasswordAuthentication no'
+
+    - name: Delete user account "alwyzon"
+      user:
+        name: alwyzon
+        state: absent
+        remove: yes
+
     - name: Restart SSH daemon
       service:
         name: sshd
