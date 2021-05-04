@@ -12,20 +12,20 @@
   tasks:
     - name: Create new user account
       user:
-        name: USERNAME_TO_ADD
+        name: USERNAME_TO_ADD #Edit this AFTER the ": "
         groups: sudo
         append: yes
         state: present
         create_home: yes
         shell: /bin/bash
-        password: 'ENCRYPTED_PASS'
+        password: ENCRYPTED_PASS #Edit this AFTER the ": "
 
     - name: Add public key to users's .ssh/authorized_keys file
       authorized_key:
-        user: USERNAME_TO_ADD
+        user: USERNAME_TO_ADD #Edit this AFTER the ": "
         state: present
         manage_dir: yes
-        key: ssh-rsa_COPY_PUBLIC_KEY_HERE
+        key: ssh-rsa_COPY_PUBLIC_KEY_HERE  #Edit this AFTER the ": "
 
     - name: Disable root from being allowed to login
       replace:
