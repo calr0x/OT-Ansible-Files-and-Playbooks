@@ -4,8 +4,14 @@
 # To encrypt the password run the following:
 # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
 # Copy the output to the 'password' area of this config.
+#
+# Settings to edit:
+# USERNAME_TO_ADD (two places)
+# ENCRYPTED_PASS (one place)
+# ssh-rsa_COPY_PUBLIC_KEY_HERE (one place)
+#
 
-- name: Adding new user account to Ubuntu
+- name: Add new sudo user account to Ubuntu and disable root account
   hosts: all
   gather_facts: no
 
@@ -43,12 +49,6 @@
         path: /etc/ssh/sshd_config
         regexp: '#PasswordAuthentication yes'
         replace: 'PasswordAuthentication no'
-
-    - name: Delete user account "alwyzon"
-      user:
-        name: alwyzon
-        state: absent
-        remove: yes
 
     - name: Restart SSH daemon
       service:
