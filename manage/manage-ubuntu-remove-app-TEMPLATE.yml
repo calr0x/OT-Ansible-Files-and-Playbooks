@@ -1,0 +1,11 @@
+---
+
+- name: Remove Application from Ubuntu server
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Removing Application
+      apt:
+        name: APPLICATION_NAME
+        state: absent

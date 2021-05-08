@@ -17,12 +17,7 @@
         chdir: /root/Cosmic_OverlayV2/cron-jobs-node
         cmd: '{{ item }}'
       loop:
-        - forever stop notification.js
-        - forever stop archive.js
-        - forever stop awsbackup.js
-        - forever stop ping.js
-        - forever stop report.js
-        - forever stop awsjob.js
+        - forever stop all
         - forever start notification.js
         - forever start archive.js
         - forever start awsbackup.js

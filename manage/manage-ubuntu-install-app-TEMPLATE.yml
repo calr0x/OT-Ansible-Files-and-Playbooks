@@ -1,0 +1,12 @@
+---
+
+- name: Install Application
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Installing Application
+      apt:
+        name: APPLICATION
+        state: present
+        update_cache: yes
