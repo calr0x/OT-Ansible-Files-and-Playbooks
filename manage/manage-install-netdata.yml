@@ -17,7 +17,7 @@
         mode: '0700'
 
     - name: Install Netdata
-      shell: yes "" | ./root/kickstart.sh
+      shell: yes "" | /root/kickstart.sh
 
     - name: Claiming node
       shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN
