@@ -1,0 +1,36 @@
+
+# This will delete the /etc/netdata/health.d directory on your server and
+# copy any files in data/netdata_config_files to the server. The servers will be a mirror
+# of the data/netdata_config_files directory.
+
+---
+
+- name: Install Netdata alert changes
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Delete existing directory
+      file:
+        path: "/etc/netdata/health.d/"
+        state: absent
+
+    - name: Create directory
+      file:
+        path: "/etc/netdata/health.d/"
+        state: directory
+        mode: '0755'
+
+    - name: Copy netdata directory to server
+      copy:
+        src: "{{ item }}"
+        dest: /etc/netdata/health.d/
+        owner: root
+        group: root
+        mode: '0644'
+      with_fileglob: "/root/OT-Ansible-Files-and-Playbooks/data/netdata_config_files/*"
+
+    - name: Restart netdata service
+      service:
+        name: netdata
+        state: restarted
