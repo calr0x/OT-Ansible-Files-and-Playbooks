@@ -13,5 +13,15 @@
       path: /var/lib/netdata/cloud.d
       state: absent
 
+  - name: Install uuid-runtime
+    apt:
+      name: uuid-runtime
+      state: present
+
   - name: Claiming node
-    shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN
+    shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN -id=$(uuidgen)
+
+  - name: Restart netdata service
+    service:
+      name: netdata
+      state: restarted
