@@ -8,5 +8,10 @@
   gather_facts: no
 
   tasks:
-    - name: Claiming node
-      shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN
+  - name: Unclaim node
+    file:
+      path: /var/lib/netdata/cloud.d
+      state: absent
+
+  - name: Claiming node
+    shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN
