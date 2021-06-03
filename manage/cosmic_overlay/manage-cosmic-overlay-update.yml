@@ -1,0 +1,26 @@
+---
+- name: Update Cosmic_Overlay
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Git pull Cosmic_Overlay files
+      git:
+        repo: 'https://github.com/CosmiCloud/Cosmic_OverlayV2.git'
+        dest: /root/Cosmic_OverlayV2
+        update: yes
+        force: yes
+        clone: yes
+
+    - name: Stop and start Cosmic_Overlay scripts (notification, archive, awsbackup, ping, report, awsjob)
+      command:
+        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+        cmd: '{{ item }}'
+      loop:
+        - forever stop all
+        - forever start notification.js
+        - forever start archive.js
+        - forever start awsbackup.js
+        - forever start ping.js
+        - forever start report.js
+        - forever start awsjob.js

@@ -1,0 +1,15 @@
+---
+
+# THIS FILE REQUIRES AN EDIT!!
+# REPLACE APPLICATION_NAME WITH THE NAME OF THE APPLICATION AS IT APPEARS IN UBUNTU
+
+- name: Install Application
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Installing Application
+      apt:
+        name: APPLICATION_NAME
+        state: present
+        update_cache: yes

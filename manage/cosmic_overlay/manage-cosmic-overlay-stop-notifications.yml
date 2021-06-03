@@ -1,0 +1,19 @@
+---
+
+# This module will stop the Cosmic_Overlay "forever notification" script to stop
+# notification spam. It will disable ALL telegram notifications.
+
+- name: Stop Cosmic_Overlay notifications
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Stop all Cosmic_Overlay scripts and restart all scripts aside from notifications and aws_job (creates OT jobs)
+    command:
+      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+      cmd: '{{ item }}'
+    loop:
+      - forever stopall
+      - forever start archive.js
+      - forever start awsbackup.js
+      - forever start ping.js
