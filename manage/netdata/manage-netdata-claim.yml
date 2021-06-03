@@ -10,13 +10,14 @@
     claim_token: CLAIM_TOKEN
     claim_rooms: CLAIM_ROOMS
     claim_url: https://app.netdata.cloud
+    reclaim: false
   gather_facts: no
 
   tasks:
   - name: Claim to Netdata Cloud
     block:
 
-    - name: Check if node is already claimed
+    - name: Checking if node is already claimed
       # This check is used to prevent errors in the following task to claim the node to Netdata Cloud.
       stat:
         path: /var/lib/netdata/cloud.d/claimed_id
