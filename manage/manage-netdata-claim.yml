@@ -21,7 +21,7 @@
   - name: Claiming node
     shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN -id=$(uuidgen)
 
-  - name: Restart netdata service
+  - name: Restart service httpd, in all cases
     service:
-      name: netdata
+      name: httpd
       state: restarted
