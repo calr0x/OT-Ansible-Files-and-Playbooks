@@ -1,7 +1,9 @@
 ---
 
-# This module will stop the Cosmic_Overlay "forever notification" script to stop
-# notification spam. It will disable ALL telegram notifications.
+# This module will stop the Cosmic_Overlay "forever notification" script.
+# It will disable ALL telegram notifications.
+
+# Settings to change: NONE
 
 - name: Stop Cosmic_Overlay notifications
   hosts: all

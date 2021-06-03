@@ -1,4 +1,7 @@
 ---
+
+# Settings to change: NONE
+
 - name: Update Cosmic_Overlay
   hosts: all
   gather_facts: no

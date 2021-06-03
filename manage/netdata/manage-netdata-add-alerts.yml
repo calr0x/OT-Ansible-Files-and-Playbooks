@@ -28,7 +28,7 @@
         owner: root
         group: root
         mode: '0644'
-      with_fileglob: "/root/OT-Ansible-Files-and-Playbooks/data/netdata_config_files/*"
+      with_fileglob: "../netdata_files/*"
 
     - name: Restart netdata service
       service:
