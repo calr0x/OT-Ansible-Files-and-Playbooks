@@ -17,7 +17,7 @@
         mode: '0700'
 
     - name: Install Netdata
-      shell: yes "" | ./kickstart.sh
+      shell: yes "" | /root/OT-Ansible-Files-and-Playbooks/data/kickstart.sh
 
     - name: Claiming node
       shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN
