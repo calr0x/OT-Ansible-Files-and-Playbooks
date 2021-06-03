@@ -10,7 +10,7 @@
     claim_token: CLAIM_TOKEN
     claim_rooms: CLAIM_ROOMS
     claim_url: https://app.netdata.cloud
-    reclaim: false
+    reclaim: true
   gather_facts: no
 
   tasks:
@@ -31,6 +31,10 @@
 
   - name: Re-claim a node to Netdata Cloud
     block:
+    - name: Install uuid-runtime
+      apt:
+        name: uuid-runtime
+        state: present
 
     - name: Ensure `uuidgen` is installed
       stat:
