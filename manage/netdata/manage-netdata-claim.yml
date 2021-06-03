@@ -1,17 +1,10 @@
 # This will claim/re-claim the Netdata client on your servers.
 
-# Settings to edit:
-# CLAIM_TOKEN (Get this from the netdata website "-token=". Copy until the space before -rooms.)
-# CLAIM_ROOMS (Get this from the netdata website "-rooms=". Copy until the space before -url.)
 ---
 
 - name: Claim/reclaim a Netdata client
   hosts: all
-  vars:
-    claim_token: CLAIM_TOKEN
-    claim_rooms: CLAIM_ROOMS
-    claim_url: https://app.netdata.cloud
-    reclaim: true
+  vars_files: "config.yml"
   gather_facts: no
 
   tasks:
