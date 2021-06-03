@@ -1,16 +1,17 @@
-# This will install the Netdata client on your servers.
-# Edit "shell: sudo netdata-claim.sh" line to add your claim token.
+# This will claim/re-claim the Netdata client on your servers.
 
-# THIS FILE REQUIRES AN EDIT!!!
-# SEE LINE 23
+# Settings to edit:
+# CLAIM_TOKEN (Get this from the netdata website "Claim Nodes". Copy the string on the right side.)
 ---
 
-- name: Install Netdata
+- name: Claim/reclaim a Netdata client
   hosts: all
+  vars:
+    claim_token: CLAIM_TOKEN
   gather_facts: no
 
   tasks:
-  - name: Unclaim node
+  - name: Unclaim node if already claimed
     file:
       path: /var/lib/netdata/cloud.d
       state: absent
@@ -21,7 +22,7 @@
       state: present
 
   - name: Claiming node
-    shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN -id=$(uuidgen)
+    shell: sudo netdata-claim.sh "{{ claim_token }}" -id=$(uuidgen)
 
   - name: Restart netdata service
     service:

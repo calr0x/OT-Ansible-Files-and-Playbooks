@@ -1,4 +1,8 @@
 ---
+
+# This will upgrade the Ubuntu servers and reboot if required. This will ONLY upgrade and will not dist-upgrade
+# nor will it upgrade from one major version to another. Exp. Ubuntu 18 to Ubuntu 20.
+
 - name: Update Ubuntu OS software. Will reboot if needed!
   hosts: all
   gather_facts: no

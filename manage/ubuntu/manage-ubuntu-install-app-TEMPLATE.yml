@@ -6,7 +6,7 @@
 - name: Install Application
   hosts: all
   vars:
-    application_name: mlocate
+    application_name: APPLICATION_NAME
   gather_facts: no
 
   tasks:
