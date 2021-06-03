@@ -1,6 +1,8 @@
 # This will install the Netdata client on your servers.
 # Edit "shell: sudo netdata-claim.sh" line to add your claim token.
 
+# THIS FILE REQUIRES AN EDIT!!!
+# SEE LINE 23
 ---
 
 - name: Install Netdata
