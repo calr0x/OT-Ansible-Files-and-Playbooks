@@ -1,15 +1,17 @@
 ---
 
-# THIS FILE REQUIRES AN EDIT!!
-# REPLACE APPLICATION_NAME WITH THE NAME OF THE APPLICATION AS IT APPEARS IN UBUNTU
+# Settings to edit:
+# APPLICATION_NAME (Replace with the application name as it apepars in Ubuntu)
 
 - name: Install Application
   hosts: all
+  vars:
+    application_name: mlocate
   gather_facts: no
 
   tasks:
     - name: Installing Application
       apt:
-        name: APPLICATION_NAME
+        name: "{{ application_name }}"
         state: present
         update_cache: yes

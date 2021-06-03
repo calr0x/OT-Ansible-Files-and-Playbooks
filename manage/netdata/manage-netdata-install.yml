@@ -1,10 +1,15 @@
 # This will install the Netdata client on your servers.
 # Edit "shell: sudo netdata-claim.sh" line to add your claim token.
+#
+# Settings to edit:
+# CLAIM_TOKEN (Get this from the netdata website "Claim Nodes". Copy the string on the right side.)
 
 ---
 
 - name: Install Netdata
   hosts: all
+  vars:
+    claim_token: CLAIM_TOKEN
   gather_facts: no
 
   tasks:
@@ -20,4 +25,4 @@
       shell: yes "" | /root/OT-Ansible-Files-and-Playbooks/data/kickstart.sh
 
     - name: Claiming node
-      shell: sudo netdata-claim.sh EDIT_PUT_YOUR_CLAIM_TOKEN
+      shell: sudo netdata-claim.sh "{{ claim_token }}"
