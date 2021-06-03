@@ -1,5 +1,4 @@
 # This will install the Netdata client on your servers.
-# Edit "shell: sudo netdata-claim.sh" line to add your claim token.
 #
 # Settings to edit:
 # CLAIM_TOKEN (Get this from the netdata website "Claim Nodes". Copy the string on the right side.)
@@ -9,20 +8,45 @@
 - name: Install Netdata
   hosts: all
   vars:
-    claim_token: CLAIM_TOKEN
-  gather_facts: no
+    - "config.yml"
+  become: true
+  become_method: sudo
 
   tasks:
-    - name: Copy kickstart.sh file to server
-      copy:
-        src: ~/OT-Ansible-Files-and-Playbooks/data/kickstart.sh
-        dest: /root/
-        owner: root
-        group: root
-        mode: '0700'
+  - name: Download the installation script
+    get_url:
+      url: https://my-netdata.io/kickstart.sh
+      dest: ~/kickstart.sh
+      mode: +x
 
-    - name: Install Netdata
-      shell: yes "" | /root/OT-Ansible-Files-and-Playbooks/data/kickstart.sh
+  - name: Install Netdata
+    command: ~/kickstart.sh --dont-wait --claim-token "{{ claim_token }}" --claim-rooms "{{ claim_rooms }}" --claim-url "{{ claim_url }}"
 
-    - name: Claiming node
-      shell: sudo netdata-claim.sh "{{ claim_token }}"
+  - name: Cleanup installation script
+    file:
+      path: ~/kickstart.sh
+      state: absent
+
+###############################
+
+#- name: Install Netdata
+#  hosts: all
+#  vars:
+#    claim_token: CLAIM_TOKEN
+#    claim_rooms: CLAIM_ROOMS
+#    claim_url: https://app.netdata.cloud
+#  gather_facts: no
+
+#  tasks:
+#    - name: Copy kickstart.sh file to server
+#      copy:
+#        src: ~/OT-Ansible-Files-and-Playbooks/data/kickstart.sh
+#        dest: /root/
+#        owner: root
+#        mode: '0700'
+
+#    - name: Install Netdata
+#      shell: yes "" | /root/OT-Ansible-Files-and-Playbooks/data/kickstart.sh
+
+#    - name: Claiming node
+#      shell: sudo netdata-claim.sh "{{ claim_token }}"
