@@ -11,6 +11,18 @@
   gather_facts: no
 
   tasks:
+    - name: Create directories
+      file:
+        path: /root/OT-Ansible-Files-and-Playbooks/manage/data
+        state: directory
+        mode: '0755'
+
+    - name: Create directories
+      file:
+        path: /root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/data
+        state: directory
+        mode: '0755'
+
     - name: Install send.sh
       copy:
         src: ~/OT-Ansible-Files-and-Playbooks/manage/data/send.sh
@@ -18,6 +30,14 @@
         owner: root
         group: root
         mode: '0700'
+
+    - name: Install config.sh
+      copy:
+        src: ~/OT-Ansible-Files-and-Playbooks/manage/data/config.sh
+        dest: /root/OT-Ansible-Files-and-Playbooks/manage/data/config.sh
+        owner: root
+        group: root
+        mode: '0600'
 
     - name: Install bid check monitor
       copy:
