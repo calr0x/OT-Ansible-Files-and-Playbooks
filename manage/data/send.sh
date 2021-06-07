@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "/root/OT-Smoothbrain-Backup/config.sh"
+source "/root/OT-Ansible-Files-and-Playbooks/manage/data/config.sh"
 
 HOST=$(hostname)
 MESSAGE="$HOST: $1"

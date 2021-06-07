@@ -18,7 +18,8 @@
         owner: root
         group: root
         mode: '0700'
-    - name: Install monitor: bid check
+
+    - name: Install bid check monitor
       copy:
         src: ~/OT-Ansible-Files-and-Playbooks/manage/ubuntu/data/bid_check.sh
         dest: /root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/data/bid_check.sh
@@ -26,9 +27,9 @@
         group: root
         mode: '0700'
 
-    - name: Cron: Add monitor (bid check) schedule (every 15 minutes)
+    - name: Add monitor (bid check) schedule to cron (every 15 minutes)
       cron:
-        name: "Monitor: Bid Check"
+        name: Monitor Bid Check
         minute: "*/5"
         hour: "*"
         day: "*"
