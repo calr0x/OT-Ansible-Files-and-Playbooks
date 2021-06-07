@@ -47,10 +47,15 @@
         group: root
         mode: '0700'
 
+    - name: Delete existing monitor (bid check) schedule from cron
+      cron:
+        name: Monitor Bid Check
+        state: absent
+
     - name: Add monitor (bid check) schedule to cron (every 15 minutes)
       cron:
         name: Monitor Bid Check
-        minute: "*/5"
+        minute: "*/15"
         hour: "*"
         day: "*"
         month: "*"
