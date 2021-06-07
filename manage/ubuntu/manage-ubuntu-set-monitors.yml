@@ -3,11 +3,19 @@
 # This is a collection of monitors to check various states at regular scheduled intervals.
 # Monitors performed:
 #  Check for bids last 15 minutes
-#
-#
+
+# Settings to edit:
+# All "bidcheck_" entries
 
 - name: Install Monitors
   hosts: all
+  vars:
+    bidcheck_minute: */15 # Checks every 15 minutes
+    bidcheck_hour: *
+    bidcheck_day: *
+    bidcheck_month: *
+    bidcheck_weekday: *
+
   gather_facts: no
 
   tasks:
@@ -55,9 +63,9 @@
     - name: Add monitor (bid check) schedule to cron (every 15 minutes)
       cron:
         name: Monitor Bid Check
-        minute: "*/15"
-        hour: "*"
-        day: "*"
-        month: "*"
-        weekday: "*"
+        minute: "{{ bidcheck_minute }}"
+        hour: "{{ bidcheck_hour }}"
+        day: "{{ bidcheck_day }}"
+        month: "{{ bidcheck_month }}"
+        weekday: "{{ bidcheck_weekday }}"
         job: "/root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/data/bid_check.sh"
