@@ -1,0 +1,20 @@
+---
+
+# This is a collection of maintenance tasks to perform at regular scheduled intervals.
+# Tasks performed:
+#  Clear journal logs
+#  Upgrade Ubuntu
+#
+
+- name: Install Application
+  hosts: all
+  vars:
+    application_name: APPLICATION_NAME
+  gather_facts: no
+
+  tasks:
+    - name: Installing Application
+      apt:
+        name: "{{ application_name }}"
+        state: present
+        update_cache: yes

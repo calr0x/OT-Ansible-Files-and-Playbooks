@@ -1,0 +1,37 @@
+---
+
+# This is a collection of monitors to check various states at regular scheduled intervals.
+# Monitors performed:
+#  Check for bids last 15 minutes
+#
+#
+
+- name: Install Monitors
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Install send.sh
+      copy:
+        src: ~/OT-Ansible-Files-and-Playbooks/manage/data/send.sh
+        dest: /root/OT-Ansible-Files-and-Playbooks/manage/data/send.sh
+        owner: root
+        group: root
+        mode: '0700'
+    - name: Install monitor: bid check
+      copy:
+        src: ~/OT-Ansible-Files-and-Playbooks/manage/ubuntu/data/bid_check.sh
+        dest: /root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/data/bid_check.sh
+        owner: root
+        group: root
+        mode: '0700'
+
+    - name: Cron: Add monitor (bid check) schedule (every 15 minutes)
+      cron:
+        name: "Monitor: Bid Check"
+        minute: "*/5"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: "/root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/data/bid_check.sh"
