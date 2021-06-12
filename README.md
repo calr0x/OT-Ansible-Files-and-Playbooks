@@ -24,7 +24,7 @@ HINT:
       op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
       mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
       initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
- 
+
     replace_this_with_server1_domain_or_ip: #Exp. node2.server.com OR 23.34.45.57
       node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
       op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
@@ -43,12 +43,30 @@ EXP. "otnode1.domain.com" OR "22.33.44.55". MAKE SURE AND KEEP SPACING AND THE C
 ctrl+o (TO SAVE)
 Press <enter>
 ctrl-x (TO EXIT)
-  
-11. ansible-inventory config-otnodes-and-cosmic.yml
 
-LOOK FOR ANY ERRORS IN THE RESULTS OF THIS COMMAND. IF THERE ARE ANY ERRORS CORRECT THE ERRORS BY RETURNING TO STEP 6.
+11. ansible-inventory --graph (SHOULD GENERATE A SERVER TREE)
+12. ansible all -m ping
+
+THIS WILL TEST EVERYTHING BY PINGING YOUR SERVERS. LOOK FOR ANY ERRORS IN THE RESULTS OF THIS COMMAND. IF THERE ARE ANY ERRORS CORRECT THE ERRORS BY RETURNING TO STEP 6.
 
 12. rm /etc/ansible/hosts && cp config-otnodes-and-cosmic.yml /etc/ansible/hosts
+
+---
+
+__HOW YOU RUN ANSIBLE CHANGES BASED ON THE FOLLOWING:__
+
+SSHKEY PROTECTED WITH A PASSPHRASE? ALWAYS RUN THESE TWO COMMANDS BEFORE RUNNING ANSIBLE (SSH KEYS WITHOUT A PASSPHRASE NEED NO ADDTIONAL WORK):
+
+  __ssh agent bash__
+  __ssh-add__
+  __TYPE YOUR PASSPHRASE__
+
+LOGIN AS ROOT WITH PASSWORD (NO SSH KEY USED):
+
+ADD __-k__ TO ALL ANSIBLE COMMANDS
+
+___
+
 13. ansible-playbook install-complete.yml
 
 EVERYTHING IS NOW READY TO RUN COSMIC_OVERLAY!
