@@ -1,0 +1,30 @@
+---
+# Uninstalls Cosmic_Overlay.
+# THIS DISABLES LOG ROTATION, BACKUPS, AND ALL OTHER FEATURES COSMIC_OVERLAY
+# PROVIDES.
+# Settings to change: NONE
+
+- name: Remove Cosmic_Overlay
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Stop Cosmic_Overlay scripts
+      command:
+        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+        cmd: forever stopall
+
+    - name: Uninstall forever tools
+      command:
+        chdir: /root/Cosmic_OverlayV2/cron-jobs-node
+        cmd: '{{ item }}'
+      loop:
+        - npm uninstall shelljs
+        - npm uninstall express
+        - npm uninstall node-cron
+        - npm uninstall -g forever
+
+    - name: Delete Cosmic_Overlay folder
+      file:
+        path: /root/Cosmic_OverlayV2
+        state: absent
