@@ -11,6 +11,7 @@
 
   tasks:
   - name: Stop all Cosmic_Overlay scripts and restart all scripts aside from notifications and aws_job (creates OT jobs)
+    ignore_errors: yes
     command:
       chdir: /root/Cosmic_OverlayV2/cron-jobs-node
       cmd: '{{ item }}'

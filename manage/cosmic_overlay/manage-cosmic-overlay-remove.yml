@@ -10,11 +10,13 @@
 
   tasks:
     - name: Stop Cosmic_Overlay scripts
+      ignore_errors: yes
       command:
         chdir: /root/Cosmic_OverlayV2/cron-jobs-node
         cmd: forever stopall
 
     - name: Uninstall forever tools
+      ignore_errors: yes
       command:
         chdir: /root/Cosmic_OverlayV2/cron-jobs-node
         cmd: '{{ item }}'
@@ -25,6 +27,7 @@
         - npm uninstall -g forever
 
     - name: Delete Cosmic_Overlay folder
+      ignore_errors: yes
       file:
         path: /root/Cosmic_OverlayV2
         state: absent
