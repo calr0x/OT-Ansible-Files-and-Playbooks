@@ -5,14 +5,16 @@
 # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
 # Copy the output to the 'password' area of this config.
 #
+# To list the timezones:
+# timedatectl list-timezones
+#
 # Settings to edit:
 # TIMEZONE
-#
+
 
 - name: Change time on Ubuntu servers to localtime
   hosts: all
   vars:
-    timezone: America/Chicago
   gather_facts: no
 
   tasks:
