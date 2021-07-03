@@ -14,7 +14,7 @@
   tasks:
     - name: Set limit of journalctl log
       replace:
-        path: /etc/systemd
+        path: /etc/systemd/journald.conf
         regexp: '#SystemMaxUse='
         replace: SystemMaxUse="{{ size_limit }}"
     
