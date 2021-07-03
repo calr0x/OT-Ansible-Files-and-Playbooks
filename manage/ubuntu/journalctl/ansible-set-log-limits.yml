@@ -1,6 +1,6 @@
 ---
 
-# This module will limit journalctl to 150M. It will auto delete beyond this size.
+# This module will first prune the logs to a user-defined size and will limit future logs to that same size. Journalctl will auto delete beyond this size automatically.
 
 # Settings to edit:
 # size_limit (Default setting is fine for most people)
@@ -14,7 +14,7 @@
   tasks:
     - name: Prune existing logs
       command: journalctl --vacuum-size={{ size_limit }}
-      
+
     - name: Set limit of journalctl log
       replace:
         path: /etc/systemd/journald.conf
