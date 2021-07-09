@@ -1,0 +1,27 @@
+---
+
+# This auto-restarts the docker container every day at midnight.
+#
+# Settings to edit:
+# All "restart_" entries
+
+- name: Setup daily docker restart
+  hosts: all
+  vars:
+    restart_minute: '0' # Restarts every day at midnight
+    restart_hour: '*'
+    restart_day: '*'
+    restart_month: '*'
+    restart_weekday: '*'
+  gather_facts: no
+
+  tasks:
+    - name: Add monitor (Docker check) schedule to cron (every 5 minutes)
+      cron:
+        name: Monitor Docker Check
+        minute: "{{ restart_minute }}"
+        hour: "{{ restart_hour }}"
+        day: "{{ restart_day }}"
+        month: "{{ restart_month }}"
+        weekday: "{{ restart_weekday }}"
+        job: "docker restart otnode"

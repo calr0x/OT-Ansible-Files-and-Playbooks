@@ -40,7 +40,7 @@
     - name: Disable root from being allowed to login
       replace:
         path: /etc/ssh/sshd_config
-        regexp: 'PermitRootLogin yes'
+        regexp: '#?PermitRootLogin .+'
         replace: 'PermitRootLogin no'
 
     - name: Disable root account
@@ -48,11 +48,17 @@
         name: root
         password: !
 
-    - name: Changing PermitRootLogin to "no"
+    - name: Disable use of passwords
       replace:
         path: /etc/ssh/sshd_config
-        regexp: '#PasswordAuthentication yes'
+        regexp: '#?PasswordAuthentication .+'
         replace: 'PasswordAuthentication no'
+
+    - name: Force use of private keys
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: '#?PubkeyAuthentication .+'
+        replace: 'PubkeyAuthentication yes'
 
     - name: Restart SSH daemon
       service:

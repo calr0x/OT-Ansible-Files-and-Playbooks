@@ -21,3 +21,6 @@
     - name: Update timezone
       timezone:
         name: "{{ timezone }}"
+
+    - name: Rebooting system
+      reboot:
