@@ -18,7 +18,7 @@
     - name: Set limit of journalctl log
       replace:
         path: /etc/systemd/journald.conf
-        regexp: '#SystemMaxUse='
+        regexp: '#?SystemMaxUse .+'
         replace: SystemMaxUse={{ size_limit }}
     
     - name: Restart journalctl service
