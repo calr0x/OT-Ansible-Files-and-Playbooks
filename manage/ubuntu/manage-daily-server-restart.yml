@@ -1,6 +1,6 @@
 ---
 
-# This auto-restarts the docker container every day at midnight.
+# This auto-restarts the server every day at midnight.
 #
 # Settings to edit:
 # All "restart_" entries
@@ -16,9 +16,9 @@
   gather_facts: no
 
   tasks:
-    - name: Add monitor (Docker check) schedule to cron (every 5 minutes)
+    - name: Adding reboot schedule to crontab
       cron:
-        name: Monitor Docker Check
+        name: Reboot schedule
         minute: "{{ restart_minute }}"
         hour: "{{ restart_hour }}"
         day: "{{ restart_day }}"
