@@ -1,9 +1,6 @@
 ---
 
-# This module will create anew user account, add them to the SUDO group, add your public SSH key to their ~/.ssh/authrized_keys file, and disable the root account.
-# To encrypt the password run the following:
-# python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-# Copy the output to the 'password' area of this config.
+# This module will change your server's timezone to your local timezone
 #
 # To list the timezones:
 # timedatectl list-timezones
@@ -15,10 +12,11 @@
 - name: Change time on Ubuntu servers to localtime
   hosts: all
   vars:
+    timezone: YOUR_LOCAL_TIMEZONE_HERE
   gather_facts: no
 
   tasks:
-    - name: Update timezone
+    - name: Updating timezone
       timezone:
         name: "{{ timezone }}"
 

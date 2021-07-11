@@ -1,14 +1,42 @@
-# Ubuntu modules:
+# __Ubuntu modules__
 
-This folder contains various modules and playbooks that affect the docker container.
+This folder contains various modules and playbooks that affect your server. 
+
+If you run more than 2 nodes, using ansible is highly recommended.
+
+# Ansible users:
+
+Replace MODULE_NAME_HERE by the module name you want to execute on your nodes
+```
+nano /root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/MODULE_NAME_HERE.yml
+```
+
+Begin by reading the commented out section on each module
+
+When you are done editing the variables, 
+
+```
+ctrl+s
+```
+```
+ctrl+x
+```
+```
+ansible-playbook /root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/MODULE_NAME_HERE.yml
+```
 
 
 
-## __Daily server restart:__
-
+## Standard users:
 ---
-### __Standard users:__
-To schedule this job in the servers Cron:
+This section only covers how to schedule a daily server restart to your node manually on each node. 
+
+Other jobs will not be covered as part of this tutorial. Ansible is highly recommended to apply all jobs simultaneously to all nodes. 
+
+
+### __Daily server restart__
+
+To schedule this job in the server's Cron:
 
 ```
 Login as root
@@ -29,11 +57,4 @@ ctrl+s
 ```
 ctrl+x
 ```
----
-## Ansible users:
-
-1. nano manage-daily-server-restart.yml
-2. Edit the cron time (if desired)
-3. ctrl+s ctrl+x
-4. Execute manage-daily-docker-restart.yml.
 ---
