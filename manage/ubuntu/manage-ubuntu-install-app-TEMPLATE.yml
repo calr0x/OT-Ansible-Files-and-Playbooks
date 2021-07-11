@@ -1,7 +1,7 @@
 ---
 
 # Settings to edit:
-# APPLICATION_NAME (Replace with the application name as it apepars in Ubuntu)
+# APPLICATION_NAME (Replace with the application name as it appears in Ubuntu)
 
 - name: Install Application
   hosts: all
