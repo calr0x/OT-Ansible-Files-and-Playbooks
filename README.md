@@ -33,6 +33,32 @@ HINT:
       mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
       initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
 
+An example config:
+
+```
+---
+otnodes:
+  hosts:
+    24.54.132.122:  # node1.server.com OR 23.34.45.56
+      node_name: 'otnode1'
+      op_pub_key: '0x3489ru8934ur3489ur34889ur'
+      op_priv_key: '9r34ij90fi3490jfir9034ifj4i0ji34f3049'
+      initial_deposit_amount: '4000000000000000000000'
+
+    otnode1.otnode.com:  # node1.server.com OR 23.34.45.56
+      node_name: 'otnode1'
+      op_pub_key: '0x3489ru8934ur3489ur34889ur'
+      op_priv_key: '9r34ij90fi3490jfir9034ifj4i0ji34f3049'
+      initial_deposit_amount: '4000000000000000000000'
+  vars:
+    mgmt_pub_key: '0x349ir9034i90i490ir4i30ri0'
+    dh_price_factor: '.1'
+    dh_max_holding_time_in_minutes: '525600'
+    aws_access_key_id: '09290ie0392iei23e90'
+    aws_secret_access_key: '34j9d03j9d30j0dj0'
+    telegram_bot_token: '0e923jek02s09k209s:0239ks20sk'
+    telegram_chat_id: '989883433'
+```
 8. EDIT EACH "replace_this_with_server1_domain_or_ip" WITH EITHER THE DOMOAIN OR IP OF EACH SERVER.
 
 EXP. "otnode1.domain.com" OR "22.33.44.55". MAKE SURE AND KEEP SPACING AND THE COLON AT THE END.
