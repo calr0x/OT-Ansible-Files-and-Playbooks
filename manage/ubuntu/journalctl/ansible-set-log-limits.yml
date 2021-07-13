@@ -8,7 +8,7 @@
 - name: Limit journalctl log size to user-set value
   hosts: all
   vars:
-    size_limit: 150M
+    size_limit: 50M
   gather_facts: no
 
   tasks:
