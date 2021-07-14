@@ -1,0 +1,21 @@
+---
+
+# This module will copy a file to the remote server and will execute it
+#
+- name: Copy file to server and execute
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Copying file to server
+      copy:
+        src: /root/setup.sh
+        dest: /root
+        owner: root
+        group: root
+        mode: '0700'
+    
+    - name: Execute file
+      shell: /root/setup.sh
+      args:
+        chdir: /root/
