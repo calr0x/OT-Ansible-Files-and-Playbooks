@@ -1,5 +1,4 @@
 # __OT-Ansible-Files-and-Playbooks__
-
 Ansible is an open-source platform that allows deployments of configurations on a whole network of servers all at once using one single control computer.
 
 This repository will use Ansible to install and configure Ubuntu and OriginTrail nodes simultaneously on as many servers as you need. 
@@ -7,7 +6,6 @@ This repository will use Ansible to install and configure Ubuntu and OriginTrail
 You can setup one, two, or *hundreds* of servers at the same time and monitor them all at once !
 
 ## __Prerequisites :__
----
 - Linux OS (seperate from your nodes)
   -  Look into VirtualBox https://www.virtualbox.org/, a Raspberry Pi or rent a distinct budget server
 - Requires PYTHON3 on control computer
@@ -17,7 +15,6 @@ You can setup one, two, or *hundreds* of servers at the same time and monitor th
   - Other repos such as OT-Smoothbrain-Backup, OT-NodeWatch, OT-Docksucker will be installed by the playbooks automatically if required
 
 ## __Installing the repository :__
----
 Let's begin by getting the repository to your local root directory
 ```
 cd
@@ -28,20 +25,19 @@ git clone https://github.com/calr0x/OT-Ansible-Files-and-Playbooks.git
 ```
 cd OT-Ansible-Files-and-Playbooks
 ```
-Next, we want to make a local copy of the config-otnode-ansible-original.yml file and name it config-otnode-ansible.yml. 
+Next, we want to make a local copy of the config-otnode-ansible-example.yml file and name it config-otnode-ansible.yml. 
 
 You do not want to apply changes to config-otnode-ansible-original.yml file since this will be modified every time you want to git pull (ak update) your repository.
 ```
-cp config-otnode-ansible-original.yml config-otnode-ansible.yml
+cp config-otnode-ansible-example.yml config-otnode-ansible.yml
 ```
-Remember that you want to make all changes to config-otnode-ansible.yml and not config-otnode-ansible-original.yml
+Remember that you want to make all changes to config-otnode-ansible.yml and not config-otnode-ansible-example.yml
 ```
 nano config-otnode-ansible.yml
 ```
 You have the option to modify the config-otnode-ansible.yml using nano, but I strongly suggest copying the content and using notepad to modify the variables as there are many of them. 
 
 ## __Changing the config file :__
----
 You need as many of the below sections as the number of nodes you are setting up. Only two sections for two nodes are included in the template to demonstrate spacing between them. 
 
 
@@ -104,7 +100,6 @@ ctrl+s
 ctrl+x
 ```
 ## __Testing your configuration :__
----
 The following command should generate a server tree
 ```
 ansible-inventory --graph
