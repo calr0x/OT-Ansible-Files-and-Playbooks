@@ -1,23 +1,54 @@
-# OT-Ansible-Files-and-Playbooks
+# __OT-Ansible-Files-and-Playbooks__
 
-This project install and configure Ubuntu, OriginTrail Node, and Cosmic Overlay, simultaneously on as many servers as you need. You can setup one, two, or *hundreds* of servers at the same time!
+Ansible is an open-source platform that allows deployments of configurations on a whole network of servers all at once using one single control computer.
 
-- REQUIRES LINUX OS TO RUN. YOU NEED A LINUX OS THAT IS NOT USING A SERVER THAT A NODE IS RUNNING ON. LOOK INTO VIRTUALBOX (https://www.virtualbox.org/) AS A WAY TO RUN LINUX ON YOUR DESKTOP OTHERWISE RENT A VPS SERVER TO USE THIS SOFTWARE.  
-- REQUIRES PYTHON3 ON CONTROL COMPUTER.
+This repository will use Ansible to install and configure Ubuntu and OriginTrail nodes simultaneously on as many servers as you need. 
 
-THIS INSTALLER WILL **NOT** PERFORM THE ACTUAL INSTALLATION OF THE NODE. THE USER WILL BE REQUIRED TO LOG INTO EACH SERVER AND MANUALLY USE COSMIC'S SCRIPT TO INSTALL THE NODE. IT'S IMPORTANT TO MONITOR THIS PROCESS VISUALLY.
+You can setup one, two, or *hundreds* of servers at the same time and monitor them all at once !
 
-1. ALL COMMANDS ASSUME YOU ARE LOGGED IN AS ROOT.
-2. cd
-3. apt update && apt install ansible
-4. git clone https://github.com/calr0x/OT-Ansible-Files-and-Playbooks.git
-5. cd OT-Ansible-Files-and-Playbooks
-6. nano config-otnodes-and-cosmic.yml
-7. YOU NEED AS MANY OF THE BELOW SECTIONS AS THE NUMBER OF NODES YOU ARE SETTING UP. I HAVE INCLUDED TWO SECTIONS FOR TWO NODES TO DEMONSTRATE SPACING BETWEEN THEM. INDENTATIONS ARE INCREDIBLY IMPORTANT. MAKE SURE THE SECTIONS YOU ADD LINE UP PROPERLY. IF YOU COPY AND PASTE THE BELOW INCLUDE THE SPACE BEFORE EACH LINE.
-HINT:
+## __Prerequisites :__
+---
+- Linux OS (seperate from your nodes)
+  -  Look into VirtualBox https://www.virtualbox.org/, a Raspberry Pi or rent a distinct budget server
+- Requires PYTHON3 on control computer
+  - A workaround is possible for Raspberry Pis running Python 2.7
+- Requires the repo OT-Settings https://github.com/calr0x/OT-Settings as many playbooks require data from the config.sh in OT-Settings
+  - Follow the instructions there to setup config.sh
+  - Other repos such as OT-Smoothbrain-Backup, OT-NodeWatch, OT-Docksucker will be installed by the playbooks automatically if required
 
-(4) SPACES **BEFORE** "REPLACE"
-(2) SPACES BETWEEN "NODE_NAME" AND "REPLACE" (6 TOTAL FROM LEFT EDGE).
+## __Installing the repository :__
+---
+Let's begin by getting the repository to your local root directory
+```
+cd
+```
+```
+git clone https://github.com/calr0x/OT-Ansible-Files-and-Playbooks.git
+```
+```
+cd OT-Ansible-Files-and-Playbooks
+```
+Next, we want to make a local copy of the config-otnode-ansible-original.yml file and name it config-otnode-ansible.yml. 
+
+You do not want to apply changes to config-otnode-ansible-original.yml file since this will be modified every time you want to git pull (ak update) your repository.
+```
+cp config-otnode-ansible-original.yml config-otnode-ansible.yml
+```
+Remember that you want to make all changes to config-otnode-ansible.yml and not config-otnode-ansible-original.yml
+```
+nano config-otnode-ansible.yml
+```
+You have the option to modify the config-otnode-ansible.yml using nano, but I strongly suggest copying the content and using notepad to modify the variables as there are many of them. 
+
+## __Changing the config file :__
+---
+You need as many of the below sections as the number of nodes you are setting up. Only two sections for two nodes are included in the template to demonstrate spacing between them. 
+
+
+
+__Indentations are incredibly important.__ Make sure the sections you add line up properly. If you copy and paste the below, include the space before each line. 
+
+There are __(4)__ spaces __before__ "replace" and __(2)__ spaces __between__ "node_name" and "replace" (6 total from left edge)
 
     replace_this_with_server1_domain_or_ip: #Exp. node1.server.com OR 23.34.45.56
       node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
@@ -33,20 +64,20 @@ HINT:
       mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
       initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
 
-An example config:
+Here is an example :
 
 ```
 ---
 otnodes:
   hosts:
-    24.54.132.122:  # node1.server.com OR 23.34.45.56
+    24.54.132.122:
       node_name: 'otnode1'
       op_pub_key: '0x3489ru8934ur3489ur34889ur'
       op_priv_key: '9r34ij90fi3490jfir9034ifj4i0ji34f3049'
       initial_deposit_amount: '4000000000000000000000'
 
-    otnode1.otnode.com:  # node1.server.com OR 23.34.45.56
-      node_name: 'otnode1'
+    otnode1.otnode.com:
+      node_name: 'otnode2'
       op_pub_key: '0x3489ru8934ur3489ur34889ur'
       op_priv_key: '9r34ij90fi3490jfir9034ifj4i0ji34f3049'
       initial_deposit_amount: '4000000000000000000000'
@@ -59,52 +90,63 @@ otnodes:
     telegram_bot_token: '0e923jek02s09k209s:0239ks20sk'
     telegram_chat_id: '989883433'
 ```
-8. EDIT EACH "replace_this_with_server1_domain_or_ip" WITH EITHER THE DOMOAIN OR IP OF EACH SERVER.
+Edit each "replace_this_with_server1_domain_or_ip" with either the domain or IP address of each server, and make sure to keep spacing and colon at the end
 
-EXP. "otnode1.domain.com" OR "22.33.44.55". MAKE SURE AND KEEP SPACING AND THE COLON AT THE END.
+Edit each variables inside the single quotes. Syntax is very important so make sure to keep the single quotes on each side at the end
 
-9. EDIT EACH VALUE **BETWEEN** THE SINGLE QUOTES. SYNTAX IS SUPER IMPORTANT SO JUST MAKE SURE THE VALUES YOU EDIT HAVE A SINGLE QUOTE ON EACH SIDE OF IT.
+If you used notepad to modify the config, press ctrl+k repeatedly on the config to delete every line from the template and paste the content of your notepad
 
-10. When finished:
+If not, when you are done, press
+```
+ctrl+s
+```
+```
+ctrl+x
+```
+## __Testing your configuration :__
+---
+The following command should generate a server tree
+```
+ansible-inventory --graph
+```
+If you are using SSH keys with a passphrase to log in to your nodes, do the following every time you reopen your control computer before running an Ansible playbook.
 
-ctrl+o (TO SAVE)
-Press <enter>
-ctrl-x (TO EXIT)
+If you don't use SSH keys or don't have a SSH key passphrase, skip this step.
+```
+ssh-agent bash
+```
+```
+ssh-add
+```
+Input your password and press *Enter*
 
-11. ansible-inventory --graph (SHOULD GENERATE A SERVER TREE)
-12. ansible all -m ping
+If you log in as root with password only (no SSH key used), add *-k* to all ansible commands.
+\
+\
+The below command will test if your config file was done properly.
+```
+ansible all -m ping
+```
+You might have to run the above command several times to save all fingerprints into your authorized_host file. This command will test all your node servers. 
 
-THIS WILL TEST EVERYTHING BY PINGING YOUR SERVERS. LOOK FOR ANY ERRORS IN THE RESULTS OF THIS COMMAND. IF THERE ARE ANY ERRORS CORRECT THE ERRORS BY RETURNING TO STEP 6.
+This module will return *pong* on successful contact with your servers. If there are any errors, make sure the config-otnode-ansible.yml file is configured properly.
+```
+rm /etc/ansible/hosts && cp config-otnode-ansible.yml /etc/ansible/hosts
+```
+This final step will send your working config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
 
-12. rm /etc/ansible/hosts && cp config-otnodes-and-cosmic.yml /etc/ansible/hosts
+If you ever change have to modify your config-otnode-ansible.yml file, make sure you repeat the previous step to correct the ansible host file. 
+
+```
+ansible-playbook NAME_OF_MODULE.yml
+```
+The above command will be how every Ansible module will be ran from now on. 
+
+
 
 ---
 
-__HOW YOU RUN ANSIBLE CHANGES BASED ON THE FOLLOWING:__
+\
+That's it for the tutorial ! If you have made it so far without any errors, congratulations !
 
-- SSH KEY PROTECTED WITH A PASSPHRASE? ALWAYS RUN THESE TWO COMMANDS BEFORE RUNNING ANSIBLE (SSH KEYS WITHOUT A PASSPHRASE NEED NO ADDTIONAL WORK):
-
-  __ssh agent bash__  
-  __ssh-add__  
-  __TYPE YOUR PASSPHRASE AND PRESS ENTER__
-
-- LOGIN AS ROOT WITH PASSWORD (NO SSH KEY USED):
-
-  ADD __-k__ TO ALL ANSIBLE COMMANDS
-
-___
-
-13. ansible-playbook install-complete.yml
-
-EVERYTHING IS NOW READY TO RUN COSMIC_OVERLAY!
-
-BE AWARE: IF YOU PREVIOUSLY FOLLOWED COSMIC'S DIRECTIONS (ON HIS SITE) ON A PREVIOUS INSTALL WHEN YOU FINISHED INSTALLING THE NODE YOU WOULD NORMALLY NEED TO MANUALLY START HIS SCRIPTS. THIS INSTALLER **DOES** START THOSE SCRIPTS FOR YOU. THEY ARE ALREADY RUNNING AT THIS POINT. :)
-
-14. Connect to each server in your preferred SSH client (Terminus/Putty/etc) as root.
-15. cd Cosmic_OverlayV2
-16. node start_overlay.js
-17. Choose "[1] - Install Menu"
-18. Choose "[1] - Install a new node"
-19. Follow any prompts.
-
-DONE!
+Remember to visit the OT-Settings repository to complete the configurations and be ready to deploy any modules here !
