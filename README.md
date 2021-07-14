@@ -25,13 +25,13 @@ git clone https://github.com/calr0x/OT-Ansible-Files-and-Playbooks.git
 ```
 cd OT-Ansible-Files-and-Playbooks
 ```
-Next, we want to make a local copy of the config-otnode-ansible-original.yml file and name it config-otnode-ansible.yml. 
+Next, we want to make a local copy of the config-otnode-ansible-example.yml file and name it config-otnode-ansible.yml. 
 
 You do not want to apply changes to config-otnode-ansible-original.yml file since this will be modified every time you want to git pull (ak update) your repository.
 ```
-cp config-otnode-ansible-original.yml config-otnode-ansible.yml
+cp config-otnode-ansible-example.yml config-otnode-ansible.yml
 ```
-Remember that you want to make all changes to config-otnode-ansible.yml and not config-otnode-ansible-original.yml
+Remember that you want to make all changes to config-otnode-ansible.yml and not config-otnode-ansible-example.yml
 ```
 nano config-otnode-ansible.yml
 ```
