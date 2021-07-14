@@ -1,5 +1,4 @@
 # __OT-Ansible-Files-and-Playbooks__
-
 Ansible is an open-source platform that allows deployments of configurations on a whole network of servers all at once using one single control computer.
 
 This repository will use Ansible to install and configure Ubuntu and OriginTrail nodes simultaneously on as many servers as you need. 
@@ -7,7 +6,6 @@ This repository will use Ansible to install and configure Ubuntu and OriginTrail
 You can setup one, two, or *hundreds* of servers at the same time and monitor them all at once !
 
 ## __Prerequisites :__
----
 - Linux OS (seperate from your nodes)
   -  Look into VirtualBox https://www.virtualbox.org/, a Raspberry Pi or rent a distinct budget server
 - Requires PYTHON3 on control computer
@@ -17,7 +15,6 @@ You can setup one, two, or *hundreds* of servers at the same time and monitor th
   - Other repos such as OT-Smoothbrain-Backup, OT-NodeWatch, OT-Docksucker will be installed by the playbooks automatically if required
 
 ## __Installing the repository :__
----
 Let's begin by getting the repository to your local root directory
 ```
 cd
@@ -41,7 +38,6 @@ nano config-otnode-ansible.yml
 You have the option to modify the config-otnode-ansible.yml using nano, but I strongly suggest copying the content and using notepad to modify the variables as there are many of them. 
 
 ## __Changing the config file :__
----
 You need as many of the below sections as the number of nodes you are setting up. Only two sections for two nodes are included in the template to demonstrate spacing between them. 
 
 
@@ -104,7 +100,6 @@ ctrl+s
 ctrl+x
 ```
 ## __Testing your configuration :__
----
 The following command should generate a server tree
 ```
 ansible-inventory --graph
