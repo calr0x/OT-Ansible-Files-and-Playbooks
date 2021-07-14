@@ -1,0 +1,20 @@
+---
+
+# This will copy a file from your ansible monitor to your nodes
+# Replace source and destination paths before initiating module
+
+- name: Copy and paste a file from ansible monitor to nodes.
+  hosts: all
+  vars: 
+    source: YOUR_SOURCE_PATH_HERE
+    destionation: YOUR_DESTINATION_PATH_HERE
+  gather_facts: no
+
+  tasks:
+    - name: Pasting file to destination
+      ansible.builtin.copy:
+        src: "{{ source }}"
+        dest: "{{ destination }}"
+        owner: root
+        group: root
+        mode: '0744'
