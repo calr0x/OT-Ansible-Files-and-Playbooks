@@ -4,14 +4,13 @@
 
 - name: Copy and paste a file from ansible monitor to nodes.
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
     - name: Pasting file to destination
       ansible.builtin.copy:
-        src: "{{ copy_paste_source }}"
-        dest: "{{ copy_paste_destination }}"
+        src: '{{ copy_paste_source }}'
+        dest: '{{ copy_paste_destination }}'
         owner: root
         group: root
         mode: '0700'
