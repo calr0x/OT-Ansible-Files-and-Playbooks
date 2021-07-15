@@ -7,26 +7,25 @@
 
 - name: Add new sudo user account to Ubuntu and disable root account
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
     - name: Create new user account
       user:
-        name: "{{ add_user_username }}"
+        name: '{{ add_user_username }}'
         groups: sudo
         append: yes
         state: present
         create_home: yes
         shell: /bin/bash
-        password: "{{ add_user_encrypted_password }}"
+        password: '{{ add_user_encrypted_password }}'
 
     - name: Add public key to user's .ssh/authorized_keys file
       authorized_key:
-        user: "{{ add_user_username }}"
+        user: '{{ add_user_username }}'
         state: present
         manage_dir: yes
-        key: "{{ add_user_ssh_key }}"
+        key: '{{ add_user_ssh_key }}'
 
     - name: Disable root from being allowed to login
       replace:
