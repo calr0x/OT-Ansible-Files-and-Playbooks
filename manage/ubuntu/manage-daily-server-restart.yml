@@ -4,16 +4,15 @@
 
 - name: Setup daily server restart
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
     - name: Adding reboot schedule to crontab
       cron:
         name: Reboot schedule
-        minute: "{{ restart_minute }}"
-        hour: "{{ restart_hour }}"
-        day: "{{ restart_day }}"
-        month: "{{ restart_month }}"
-        weekday: "{{ restart_weekday }}"
+        minute: '{{ restart_minute }}'
+        hour: '{{ restart_hour }}'
+        day: '{{ restart_day }}'
+        month: '{{ restart_month }}'
+        weekday: '{{ restart_weekday }}'
         job: "reboot"
