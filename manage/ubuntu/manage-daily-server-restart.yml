@@ -1,27 +1,18 @@
 ---
 
 # This auto-restarts the server every day at midnight.
-#
-# Settings to edit:
-# All "restart_" entries
 
 - name: Setup daily server restart
-  hosts: all
-  vars:
-    restart_minute: '0' # Restarts every day at midnight
-    restart_hour: '*'
-    restart_day: '*'
-    restart_month: '*'
-    restart_weekday: '*'
+  hosts: otnodes
   gather_facts: no
 
   tasks:
     - name: Adding reboot schedule to crontab
       cron:
         name: Reboot schedule
-        minute: "{{ restart_minute }}"
-        hour: "{{ restart_hour }}"
-        day: "{{ restart_day }}"
-        month: "{{ restart_month }}"
-        weekday: "{{ restart_weekday }}"
+        minute: '{{ restart_minute }}'
+        hour: '{{ restart_hour }}'
+        day: '{{ restart_day }}'
+        month: '{{ restart_month }}'
+        weekday: '{{ restart_weekday }}'
         job: "reboot"

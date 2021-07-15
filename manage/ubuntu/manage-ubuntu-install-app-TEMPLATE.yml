@@ -4,14 +4,12 @@
 # APPLICATION_NAME (Replace with the application name as it appears in Ubuntu)
 
 - name: Install Application
-  hosts: all
-  vars:
-    application_name: APPLICATION_NAME
+  hosts: otnodes
   gather_facts: no
 
   tasks:
     - name: Installing Application
       apt:
-        name: "{{ application_name }}"
+        name: '{{ install_app_application_name }}'
         state: present
         update_cache: yes

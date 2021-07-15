@@ -4,13 +4,11 @@
 # APPLICATION_NAME (Replace with the application name as it apepars in Ubuntu)
 
 - name: Remove Application from Ubuntu server
-  hosts: all
-  vars:
-    application_name: APPLICATION_NAME
+  hosts: otnodes
   gather_facts: no
 
   tasks:
     - name: Removing Application
       apt:
-        name: "{{ application_name }}"
+        name: '{{ remove_app_application_name }}'
         state: absent

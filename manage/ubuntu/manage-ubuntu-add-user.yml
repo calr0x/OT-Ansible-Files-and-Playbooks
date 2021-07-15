@@ -4,38 +4,28 @@
 # To encrypt the password run the following:
 # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
 # Copy the output to the 'password' area of this config.
-#
-# Settings to edit:
-# USERNAME_TO_ADD
-# ENCRYPTED_PASS
-# SSH_KEY (FORMAT SHOULD BE "ssh-rsa_COPY_PUBLIC_KEY_HERE")
-#
 
 - name: Add new sudo user account to Ubuntu and disable root account
-  hosts: all
-  vars:
-    username: USERNAME_TO_ADD
-    encrypted_password: ENCRYPTED_PASS
-    ssh_key: SSH_KEY
+  hosts: otnodes
   gather_facts: no
 
   tasks:
     - name: Create new user account
       user:
-        name: "{{ username }}"
+        name: '{{ add_user_username }}'
         groups: sudo
         append: yes
         state: present
         create_home: yes
         shell: /bin/bash
-        password: "{{ encrypted_password }}"
+        password: '{{ add_user_encrypted_password }}'
 
     - name: Add public key to user's .ssh/authorized_keys file
       authorized_key:
-        user: "{{ username }}"
+        user: '{{ add_user_username }}'
         state: present
         manage_dir: yes
-        key: "{{ ssh_key }}"
+        key: '{{ add_user_ssh_key }}'
 
     - name: Disable root from being allowed to login
       replace:

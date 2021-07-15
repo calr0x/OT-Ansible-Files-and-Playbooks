@@ -1,24 +1,15 @@
 ---
 
 # This module will change your server's timezone to your local timezone
-#
-# To list the timezones:
-# timedatectl list-timezones
-#
-# Settings to edit:
-# TIMEZONE
-
 
 - name: Change time on Ubuntu servers to localtime
-  hosts: all
-  vars:
-    timezone: YOUR_LOCAL_TIMEZONE_HERE
+  hosts: otnodes
   gather_facts: no
 
   tasks:
     - name: Updating timezone
       timezone:
-        name: "{{ timezone }}"
+        name: '{{ timezone }}'
 
     - name: Rebooting system
       reboot:
