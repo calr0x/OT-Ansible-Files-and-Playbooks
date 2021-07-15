@@ -4,7 +4,6 @@
 
 - name: Limit journalctl log size to user-set value
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
