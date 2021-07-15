@@ -8,13 +8,13 @@
 
   tasks:
     - name: Prune existing logs
-      command: journalctl --vacuum-size={{ set_log_size_limit }}
+      command: journalctl --vacuum-size='{{ set_log_size_limit }}'
 
     - name: Set limit of journalctl log
       replace:
         path: /etc/systemd/journald.conf
         regexp: '#?SystemMaxUse=.+'
-        replace: SystemMaxUse={{ set_log_size_limit }}
+        replace: SystemMaxUse='{{ set_log_size_limit }}'
     
     - name: Restart journalctl service
       service:
