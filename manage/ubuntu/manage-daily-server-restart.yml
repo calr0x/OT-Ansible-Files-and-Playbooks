@@ -3,7 +3,7 @@
 # This auto-restarts the server every day at midnight.
 
 - name: Setup daily server restart
-  hosts: all
+  hosts: otnodes
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 

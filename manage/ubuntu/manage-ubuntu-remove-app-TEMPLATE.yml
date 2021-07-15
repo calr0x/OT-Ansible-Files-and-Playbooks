@@ -4,7 +4,7 @@
 # APPLICATION_NAME (Replace with the application name as it apepars in Ubuntu)
 
 - name: Remove Application from Ubuntu server
-  hosts: all
+  hosts: otnodes
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 

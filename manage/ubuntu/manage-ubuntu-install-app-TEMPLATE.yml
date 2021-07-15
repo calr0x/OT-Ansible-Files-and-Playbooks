@@ -4,7 +4,7 @@
 # APPLICATION_NAME (Replace with the application name as it appears in Ubuntu)
 
 - name: Install Application
-  hosts: all
+  hosts: otnodes
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 

@@ -3,7 +3,7 @@
 # This module will change your server's timezone to your local timezone
 
 - name: Change time on Ubuntu servers to localtime
-  hosts: all
+  hosts: otnodes
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 
