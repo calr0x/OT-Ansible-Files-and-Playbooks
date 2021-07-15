@@ -130,7 +130,7 @@ rm /etc/ansible/hosts && cp config-otnode-ansible.yml /etc/ansible/hosts
 ```
 This final step will send your working config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
 
-If you ever change have to modify your config-otnode-ansible.yml file, make sure you repeat the previous step to correct the ansible host file. 
+If you ever have to modify your config-otnode-ansible.yml file, make sure you repeat the previous step to correct the ansible host file. 
 
 ```
 ansible-playbook NAME_OF_MODULE.yml
