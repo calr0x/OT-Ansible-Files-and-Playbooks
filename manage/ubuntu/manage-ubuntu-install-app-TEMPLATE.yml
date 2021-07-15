@@ -5,12 +5,11 @@
 
 - name: Install Application
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
     - name: Installing Application
       apt:
-        name: "{{ install_app_application_name }}"
+        name: '{{ install_app_application_name }}'
         state: present
         update_cache: yes
