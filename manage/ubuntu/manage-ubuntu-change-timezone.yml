@@ -4,13 +4,12 @@
 
 - name: Change time on Ubuntu servers to localtime
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
     - name: Updating timezone
       timezone:
-        name: "{{ timezone }}"
+        name: '{{ timezone }}'
 
     - name: Rebooting system
       reboot:
