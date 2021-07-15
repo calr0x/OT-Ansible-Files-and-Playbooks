@@ -4,7 +4,7 @@
 
 - name: Copy and paste a file from ansible monitor to nodes.
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:

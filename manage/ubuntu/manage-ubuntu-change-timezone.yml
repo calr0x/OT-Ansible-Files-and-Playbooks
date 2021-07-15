@@ -4,7 +4,7 @@
 
 - name: Change time on Ubuntu servers to localtime
   hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:

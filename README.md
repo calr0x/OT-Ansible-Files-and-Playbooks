@@ -25,22 +25,20 @@ git clone https://github.com/calr0x/OT-Ansible-Files-and-Playbooks.git
 ```
 cd OT-Ansible-Files-and-Playbooks
 ```
-Next, we want to make a local copy of the config-otnode-ansible-example.yml file and name it config-otnode-ansible.yml. 
+Next, we want to make a local copy of the hosts-config-example file and name it __hosts-config__. 
 
 You do not want to apply changes to config-otnode-ansible-original.yml file since this will be modified every time you want to git pull (ak update) your repository.
 ```
-cp config-otnode-ansible-example.yml config-otnode-ansible.yml
+cp hosts-config-example hosts-config
 ```
-Remember that you want to make all changes to config-otnode-ansible.yml and not config-otnode-ansible-example.yml
+Remember that you want to make all changes to __hosts-config__ and not hosts-config-example
 ```
-nano config-otnode-ansible.yml
+nano hosts-config
 ```
-You have the option to modify the config-otnode-ansible.yml using nano, but I strongly suggest copying the content and using notepad to modify the variables as there are many of them. 
+You have the option to modify the hosts-config using nano, but I strongly suggest copying the content and using notepad to modify the variables as there are many of them. 
 
 ## __Changing the config file :__
 You need as many of the below sections as the number of nodes you are setting up. Only two sections for two nodes are included in the template to demonstrate spacing between them. 
-
-
 
 __Indentations are incredibly important.__ Make sure the sections you add line up properly. If you copy and paste the below, include the space before each line. 
 
@@ -88,7 +86,7 @@ otnodes:
 ```
 Edit each "replace_this_with_server1_domain_or_ip" with either the domain or IP address of each server, and make sure to keep spacing and colon at the end
 
-Edit each variables inside the single quotes. Syntax is very important so make sure to keep the single quotes on each side at the end
+Edit each variable inside the single quotes. Syntax is very important so make sure to keep the single quotes on each side at the end.
 
 If you used notepad to modify the config, press ctrl+k repeatedly on the config to delete every line from the template and paste the content of your notepad
 
@@ -124,13 +122,13 @@ ansible all -m ping
 ```
 You might have to run the above command several times to save all fingerprints into your authorized_host file. This command will test all your node servers. 
 
-This module will return *pong* on successful contact with your servers. If there are any errors, make sure the config-otnode-ansible.yml file is configured properly.
+This module will return *pong* on successful contact with your servers. If there are any errors, make sure the hosts-config file is configured properly.
 ```
-rm /etc/ansible/hosts && cp config-otnode-ansible.yml /etc/ansible/hosts
+rm /etc/ansible/hosts && cp hosts-config /etc/ansible/hosts
 ```
 This final step will send your working config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
 
-If you ever have to modify your config-otnode-ansible.yml file, make sure you repeat the previous step to correct the ansible host file. 
+## __If you ever modify your hosts-config file, make sure you repeat the previous step to correct the ansible host file.__ 
 
 ```
 ansible-playbook NAME_OF_MODULE.yml

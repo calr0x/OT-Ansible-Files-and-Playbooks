@@ -20,7 +20,7 @@ otnodes:
     aws_secret_access_key: 'GLOBALAWSSECRETKEY'
     telegram_bot_token: 'GLOBALTELEGRAMBOTTOKEN'
     telegram_chat_id: 'GLOBALTELEGRAMCHATID'
-    backup_minute: '0' # Backups every 6 hours starting midnight
+    backup_minute: '0' # Backups every 6 hours starting midnight, consult https://crontab.guru/ for help in this section
     backup_hour: '*/6'
     backup_day: '*'
     backup_month: '*'
