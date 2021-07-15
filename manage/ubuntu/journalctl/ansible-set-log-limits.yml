@@ -2,24 +2,20 @@
 
 # This module will first prune the logs to a user-defined size and will limit future logs to that same size. Journalctl will auto delete beyond this size automatically.
 
-# Settings to edit:
-# size_limit (Default setting is fine for most people)
-
 - name: Limit journalctl log size to user-set value
   hosts: all
-  vars:
-    size_limit: 50M
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 
   tasks:
     - name: Prune existing logs
-      command: journalctl --vacuum-size={{ size_limit }}
+      command: journalctl --vacuum-size={{ set_log_size_limit }}
 
     - name: Set limit of journalctl log
       replace:
         path: /etc/systemd/journald.conf
         regexp: '#?SystemMaxUse=.+'
-        replace: SystemMaxUse={{ size_limit }}
+        replace: SystemMaxUse={{ set_log_size_limit }}
     
     - name: Restart journalctl service
       service:

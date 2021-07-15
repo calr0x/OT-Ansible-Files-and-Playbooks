@@ -5,12 +5,11 @@
 
 - name: Remove Application from Ubuntu server
   hosts: all
-  vars:
-    application_name: APPLICATION_NAME
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 
   tasks:
     - name: Removing Application
       apt:
-        name: "{{ application_name }}"
+        name: "{{ remove_app_application_name }}"
         state: absent

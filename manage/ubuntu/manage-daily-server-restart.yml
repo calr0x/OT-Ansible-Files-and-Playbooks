@@ -1,18 +1,10 @@
 ---
 
 # This auto-restarts the server every day at midnight.
-#
-# Settings to edit:
-# All "restart_" entries
 
 - name: Setup daily server restart
   hosts: all
-  vars:
-    restart_minute: '0' # Restarts every day at midnight
-    restart_hour: '*'
-    restart_day: '*'
-    restart_month: '*'
-    restart_weekday: '*'
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/config-otnode-ansible.yml"
   gather_facts: no
 
   tasks:

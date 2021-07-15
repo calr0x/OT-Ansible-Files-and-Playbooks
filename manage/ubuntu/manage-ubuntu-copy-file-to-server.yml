@@ -1,7 +1,7 @@
 ---
 
 # This module will copy a file to the remote server and will execute it
-#
+
 - name: Copy file to server and execute
   hosts: all
   gather_facts: no

@@ -4,16 +4,18 @@ This folder contains various modules and playbooks that affect your server.
 
 If you run more than 2 nodes, using ansible is highly recommended.
 
+__You must complete the steps written on the official readme file to configure config-otnode-ansible.yml before pursuing this__
+
 # Ansible users:
 
-Replace MODULE_NAME_HERE by the module name you want to execute on your nodes
+Begin by editing the variables on config-otnode-ansible.yml
 ```
-nano /root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/MODULE_NAME_HERE.yml
+cd OT-Ansible-Files-and-Playbooks 
 ```
-
-Begin by reading the commented out section on each module
-
-When you are done editing the variables, 
+```
+nano  config-otnode-ansible.yml
+```
+When you are done, 
 
 ```
 ctrl+s
@@ -24,8 +26,6 @@ ctrl+x
 ```
 ansible-playbook /root/OT-Ansible-Files-and-Playbooks/manage/ubuntu/MODULE_NAME_HERE.yml
 ```
-
-
 
 ## Standard users:
 ---
