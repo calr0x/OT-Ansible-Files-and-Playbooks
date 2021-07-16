@@ -1,0 +1,16 @@
+---
+
+- name: Uninstall Smoothbrain-OT-Backup
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Delete /root/OT-Smoothbrain-Backup directory
+    file:
+      path: /root/Smoothbrain-OT-Backup
+      state: absent
+
+  - name: Delete old Cron jobs
+    cron:
+      name: "Restic backup"
+      state: absent

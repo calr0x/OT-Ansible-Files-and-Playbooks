@@ -1,0 +1,64 @@
+---
+
+# THIS WORKS ON BOTH DOCKER AND DOCKERLESS INSTALLATIONS
+#
+# This only installs disk check on your node servers, you do not need to run this if you run nodewatch-full-install.yml
+#
+# Settings to edit:
+# All "disk_check" entries on OT-Settings/config.sh
+
+- name: Install Monitor
+  hosts: otnodes
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
+  gather_facts: no
+
+  tasks:
+    - name: Delete existing OT-Nodewatch directory
+      file:
+        path: /root/OT-NodeWatch
+
+    - name: Delete existing OT-Settings directory
+      file:
+        path: /root/OT-Settings
+
+    - name: Clone OT-NodeWatch git repository
+      git:
+        repo: 'https://github.com/calr0x/OT-NodeWatch.git'
+        dest: /root/OT-NodeWatch
+        force: yes
+
+    - name: Clone OT-Settings git repository
+      git:
+        repo: 'https://github.com/calr0x/OT-Settings.git'
+        dest: /root/OT-Settings
+        force: yes
+
+    - name: Install config.sh
+      copy:
+        src: ~/OT-Settings/config.sh
+        dest: /root/OT-Settings/config.sh
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Install disk_check.sh
+      copy:
+        src: ~/OT-NodeWatch/disk_check.sh
+        dest: /root/OT-NodeWatch/disk_check.sh
+        owner: root
+        group: root
+        
+    - name: Delete existing monitor (docker check) schedule from cron
+      cron:
+        name: Monitor Disk Check
+        state: absent
+
+    - name: Add monitor (disk check) schedule to cron (once a day)
+      cron:
+        name: Monitor Disk Check
+        minute: "{{ disk_check_minute }}"
+        hour: "{{ disk_check_hour }}"
+        day: "{{ disk_check_day }}"
+        month: "{{ disk_check_month }}"
+        weekday: "{{ disk_check_weekday }}"
+        job: "/root/OT-NodeWatch/disk_check.sh"

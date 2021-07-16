@@ -1,0 +1,11 @@
+---
+
+# This only works on dockerless nodes
+
+- name: Install and configure Restic backups for OriginTrail nodes...
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Execute initial backup
+      shell: /root/OT-Smoothbrain-Backup/restic-backup.sh
