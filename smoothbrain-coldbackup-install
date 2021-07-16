@@ -56,14 +56,14 @@
       state: absent
 
   - name: Add backup schedule to cron (every 6 hours)
-      cron:
-        name: "restic cold backup"
-        minute: '{{ backup_minute }}'
-        hour: '{{ backup_hour }}'
-        day: '{{ backup_day }}'
-        month: '{{ backup_month }}'
-        weekday: '{{ backup_weekday }}'
-      job: "/root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh"
+    cron:
+      name: "restic cold backup"
+      minute: '{{ backup_minute }}'
+      hour: '{{ backup_hour }}'
+      day: '{{ backup_day }}'
+      month: '{{ backup_month }}'
+      weekday: '{{ backup_weekday }}'
+    job: "/root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh"
 
   - name: Execute initial cold backup
     shell: /root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh
