@@ -1,0 +1,65 @@
+---
+
+# THIS ONLY WORKS ON DOCKERLESS INSTALLATIONS
+#
+# This only installs bid check on your node servers, you do not need to run this if you run nodewatch-full-install.yml
+#
+# Settings to edit:
+# All "bid_check" entries on OT-Settings/config.sh
+
+- name: Install Monitors
+  hosts: otnodes
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
+  gather_facts: no
+
+  tasks:
+    - name: Delete existing OT-Nodewatch directory
+      file:
+        path: /root/OT-NodeWatch
+
+    - name: Delete existing OT-Settings directory
+      file:
+        path: /root/OT-Settings
+        
+    - name: Clone OT-NodeWatch git repository
+      git:
+        repo: 'https://github.com/calr0x/OT-NodeWatch.git'
+        dest: /root/OT-NodeWatch
+        force: yes
+
+    - name: Clone OT-Settings git repository
+      git:
+        repo: 'https://github.com/calr0x/OT-Settings.git'
+        dest: /root/OT-Settings
+        force: yes
+
+    - name: Install config.sh
+      copy:
+        src: ~/OT-Settings/config.sh
+        dest: /root/OT-Settings/config.sh
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Install bid_check.sh
+      copy:
+        src: ~/OT-NodeWatch/bid_check.sh
+        dest: /root/OT-NodeWatch/bid_check.sh
+        owner: root
+        group: root
+        mode: '0700'
+
+    - name: Delete existing monitor (bid check) schedule from cron
+      cron:
+        name: Monitor Bid Check
+        state: absent
+
+    - name: Add monitor (bid check) schedule to cron
+      cron:
+        name: Monitor Bid Check
+        minute: '{{ bid_check_minute }}'
+        hour: '{{ bid_check_hour }}'
+        day: '{{ bid_check_day }}'
+        month: '{{ bid_check_month }}'
+        weekday: '{{ bid_check_weekday }}'
+        job: "/root/OT-NodeWatch/bid_check.sh"

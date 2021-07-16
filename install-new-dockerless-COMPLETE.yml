@@ -1,0 +1,165 @@
+---
+# This playbook is designed to be an all-in-one solution for a new dockerless node creation
+# OT-Ansible and OT-Settings instructions MUST BE followed before attempting this
+# This also includes OT-NodeWatch and OT-Smoothbrain-Backup setups and automation
+#
+# This still requires testing, please hold before trying
+#
+- name: Configure Ubuntu and Install new dockerless otnodes
+  hosts: newnodes
+  gather_facts: yes
+
+  - name: Make /root directory
+    file:
+      path: /root
+      state: directory
+      mode: '0770'
+
+  - name: Install git
+    apt:
+      name: git
+      state: present
+      update_cache: yes
+
+  - name: Clone OT-DockSucker git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-DockSucker.git'
+      dest: /root/OT-DockSucker
+      force: yes
+
+  - name: Clone OT-Settings git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-Settings.git'
+      dest: /root/OT-Settings
+      force: yes
+
+  - name: Copy config file
+    copy:
+      src: ~/OT-Settings/config.sh
+      dest: /root/OT-Settings
+      owner: root
+      group: root
+      mode: '0700'
+
+  - name: Execute dockerless installation
+    shell: /root/OT-DockSucker/install-new-dockerless-server.sh >> OUTPUT
+    args:
+      chdir: /root/OT-DockSucker/
+
+  - name: Copy node config file to server
+    copy:
+      src: ~/OT-Settings/data/origintrail_noderc
+      dest: /ot-node/current/.origintrail_noderc
+      owner: root
+      group: root
+      mode: '0600'
+
+  - name: Edit node config with initial deposit amount
+    replace:
+      path: /ot-node/current/.origintrail_noderc
+      regexp: INITIAL_DEPOSIT_AMOUNT_HERE
+      replace: '{{ initial_deposit_amount }}'
+
+  - name: Edit node config with operational wallet public key
+    replace:
+      path: /ot-node/current/.origintrail_noderc
+      regexp: PUBLIC_KEY_OF_YOUR_WALLET
+      replace: '{{ op_pub_key }}'
+
+  - name: Edit node config with operational wallet private key
+    replace:
+      path: /ot-node/current/.origintrail_noderc
+      regexp: PRIVATE_KEY_OF_YOUR_WALLET
+      replace: '{{ op_priv_key }}'
+
+  - name: Edit node config with management wallet public key
+    replace:
+      path: /ot-node/current/.origintrail_noderc
+      regexp: PUBLIC_KEY_OF_MANAGEMENT_WALLET
+      replace: '{{ mgmt_pub_key }}'
+
+  - name: Edit node config with price factor
+    replace:
+      path: /ot-node/current/.origintrail_noderc
+      regexp: DH_PRICE_FACTOR
+      replace: '{{ dh_price_factor }}'
+
+  - name: Edit node config with max holding time
+    replace:
+      path: /ot-node/current/.origintrail_noderc
+      regexp: DH_HOLDING_TIME_MINUTES
+      replace: '{{ dh_max_holding_time_in_minutes }}'
+
+  - name: Edit node config with max gas price
+    replace:
+      path: /ot-node/current/.origintrail_noderc
+      regexp: GAS_PRICE
+      replace: '{{ gas_price }}'
+
+  - name: Delete existing OT-NodeWatch folder
+    file:
+      path: /root/OT-NodeWatch
+      state: absent
+
+  - name: Clone OT-NodeWatch git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-NodeWatch.git'
+      dest: /root/OT-NodeWatch
+      force: yes
+
+  - name: Delete existing monitor (bid check) schedule from cron
+    cron:
+      name: Monitor Bid Check
+      state: absent
+
+  - name: Delete existing monitor (disk check) schedule from cron
+    cron:
+      name: Monitor Disk Check
+      state: absent
+
+  - name: Add monitor (bid check) schedule to cron (every hour)
+    cron:
+      name: Monitor Bid Check
+      minute: '{{ bid_check_minute }}'
+      hour: '{{ bid_check_hour }}'
+      day: '{{ bid_check_day }}'
+      month: '{{ bid_check_month }}'
+      weekday: '{{ bid_check_weekday }}'
+      job: "/root/OT-NodeWatch/bid_check.sh"
+
+  - name: Add monitor (disk check) schedule to cron (every hour)
+    cron:
+      name: Monitor Disk Check
+      minute: '{{ disk_check_minute }}'
+      hour: '{{ disk_check_hour }}'
+      day: '{{ disk_check_day }}'
+      month: '{{ disk_check_month }}'
+      weekday: '{{ disk_check_weekday }}'
+      job: "/root/OT-NodeWatch/disk_check.sh"
+
+  - name: Delete existing OT-Smoothbrain-Backup folder
+    file:
+      path: /root/OT-Smoothbrain-Backup
+      state: absent
+
+  - name: Clone OT-Smoothbrain-Backup git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-Smoothbrain-Backup.git'
+      dest: /root/OT-Smoothbrain-Backup
+      force: yes
+
+  - name: Copy restic file
+    copy:
+      src: /root/OT-Smoothbrain-Backup/restic
+      dest: /usr/local/bin
+      mode: '0755'
+
+  - name: Add backup schedule to cron (every 6 hours)
+      cron:
+        name: "restic backup"
+        minute: '{{ backup_minute }}'
+        hour: '{{ backup_hour }}'
+        day: '{{ backup_day }}'
+        month: '{{ backup_month }}'
+        weekday: '{{ backup_weekday }}'
+      job: "/root/OT-Smoothbrain-Backup/restic-backup.sh"

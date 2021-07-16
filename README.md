@@ -61,20 +61,28 @@ There are __(4)__ spaces __before__ "replace" and __(2)__ spaces __between__ "no
 Here is an example :
 
 ```
----
 otnodes:
-  hosts:
-    24.54.132.122:
-      node_name: 'otnode1'
-      op_pub_key: '0x3489ru8934ur3489ur34889ur'
-      op_priv_key: '9r34ij90fi3490jfir9034ifj4i0ji34f3049'
-      initial_deposit_amount: '4000000000000000000000'
+  children:
+    newnodes:
+      hosts:
+        24.54.132.122:
+          node_name: 'otnode1'
+          op_pub_key: '0x3489nf98f948m589tm85mg'
+          op_priv_key: '3274t2364t26hnd329obnf0djf'
+          initial_deposit_amount: '4000000000000000000000'
 
-    otnode1.otnode.com:
-      node_name: 'otnode2'
-      op_pub_key: '0x3489ru8934ur3489ur34889ur'
-      op_priv_key: '9r34ij90fi3490jfir9034ifj4i0ji34f3049'
-      initial_deposit_amount: '4000000000000000000000'
+        otnode1.otnode.com:
+          node_name: 'otnode2'
+          op_pub_key: '0x3489ru8934ur3489ur34889ur'
+          op_priv_key: '9r34ij90fi3490jfir9034ifj4i0ji34f3049'
+          initial_deposit_amount: '4000000000000000000000'
+    existingnodes:
+      hosts:
+        34.67.45.124:
+          node_name: 'otnode3'
+
+        otnode1.otnode.com:
+          node_name: 'otnode4'
   vars:
     mgmt_pub_key: '0x349ir9034i90i490ir4i30ri0'
     dh_price_factor: '.1'
@@ -88,6 +96,10 @@ Edit each "replace_this_with_server1_domain_or_ip" with either the domain or IP 
 
 Edit each variable inside the single quotes. Syntax is very important so make sure to keep the single quotes on each side at the end.
 
+The "newnodes" section is for the creation of new dockerless nodes, which requires more information.
+
+The "existingnodes" section is to integrate your current nodes into ansible and other monitoring scripts, which only requires a node name and IP.
+
 If you used notepad to modify the config, press ctrl+k repeatedly on the config to delete every line from the template and paste the content of your notepad
 
 If not, when you are done, press
@@ -98,6 +110,13 @@ ctrl+s
 ctrl+x
 ```
 ## __Testing your configuration :__
+The next step will send your working config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
+
+__If you ever modify your hosts-config file, make sure you repeat the previous step to correct the ansible host file.__
+```
+rm /etc/ansible/hosts && cp hosts-config /etc/ansible/hosts
+```
+
 The following command should generate a server tree
 ```
 ansible-inventory --graph
@@ -123,23 +142,33 @@ ansible all -m ping
 You might have to run the above command several times to save all fingerprints into your authorized_host file. This command will test all your node servers. 
 
 This module will return *pong* on successful contact with your servers. If there are any errors, make sure the hosts-config file is configured properly.
-```
-rm /etc/ansible/hosts && cp hosts-config /etc/ansible/hosts
-```
-This final step will send your working config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
-
-## __If you ever modify your hosts-config file, make sure you repeat the previous step to correct the ansible host file.__ 
 
 ```
 ansible-playbook NAME_OF_MODULE.yml
 ```
-The above command will be how every Ansible module will be ran from now on. 
+### __Please take your time to read all commented out info inside each Ansible playbook file before running them, you can use nano command to consult them__
 
+The previous command will be how every Ansible module will be ran from now on if you are logged in as root on the node servers with an SSH key. 
 
+## __Specifications:__
 
+If you are logged in as root on your node servers with a password instead, add -k
+```
+ansible-playbook -k ansible/install-restic.yml
+```
+If you are logged in as a sudo user account on the node servers with a password, add -u REPLACE_WITH_USERNAME -b -k -K
+```
+ansible-playbook -u REPLACE_WITH_USERNAME -b -k -K ansible/install-restic.yml
+```
+If you are logged in as a sudo user account on the node servers with an SSH key, add -u REPLACE_WITH_USERNAME -b -K
+```
+ansible-playbook -u REPLACE_WITH_USERNAME -b -K ansible/install-restic.yml
+```
 ---
 
-\
-That's it for the tutorial ! If you have made it so far without any errors, congratulations !
+That's it for the tutorial, if you have made it so far without any errors, congratulations !
 
-Remember to visit the OT-Settings repository to complete the configurations and be ready to deploy any modules here !
+Your control computer is now ready to deploy Ansible playbooks to your servers !
+
+Remember to visit the OT-Settings repository to complete the configurations.
+
