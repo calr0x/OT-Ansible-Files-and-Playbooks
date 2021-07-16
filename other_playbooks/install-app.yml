@@ -4,7 +4,7 @@
 # APPLICATION_NAME (Replace with the application name as it appears in Ubuntu)
 
 - name: Install Application
-  hosts: otnodes
+  hosts: all
   gather_facts: no
 
   tasks:

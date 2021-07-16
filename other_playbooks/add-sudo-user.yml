@@ -6,7 +6,7 @@
 # Copy the output to the 'password' area of this config.
 
 - name: Add new sudo user account to Ubuntu and disable root account
-  hosts: otnodes
+  hosts: all
   gather_facts: no
 
   tasks:

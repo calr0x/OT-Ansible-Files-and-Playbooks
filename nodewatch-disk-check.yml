@@ -8,7 +8,7 @@
 # All "disk_check" entries on OT-Settings/config.sh
 
 - name: Install Monitor
-  hosts: otnodes
+  hosts: all
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
@@ -48,7 +48,7 @@
         owner: root
         group: root
         
-    - name: Delete existing monitor (docker check) schedule from cron
+    - name: Delete existing monitor (disk check) schedule from cron
       cron:
         name: Monitor Disk Check
         state: absent

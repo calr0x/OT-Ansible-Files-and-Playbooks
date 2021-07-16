@@ -3,7 +3,7 @@
 # This will copy a file from your ansible monitor to your nodes
 
 - name: Copy and paste a file from ansible monitor to nodes.
-  hosts: otnodes
+  hosts: all
   gather_facts: no
 
   tasks:
