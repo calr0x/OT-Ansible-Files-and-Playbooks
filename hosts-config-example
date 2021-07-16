@@ -1,26 +1,25 @@
 ---
-otnodes:
-  children:
-    newnodes:
-      hosts:
-        replace_this_with_server1_domain_or_ip:
-          node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
-          op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
-          op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
-          initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+all:
+  newnodes:
+    hosts:
+      replace_this_with_server1_domain_or_ip:
+        node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
+        op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
+        op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
+        initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
 
-        replace_this_with_server2_domain_or_ip:
-          node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
-          op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
-          op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
-          initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
-    existingnodes:
-      hosts:
-        replace_this_with_server3_domain_or_ip:
-          node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
+      replace_this_with_server2_domain_or_ip:
+        node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
+        op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
+        op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
+        initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+  existingnodes:
+    hosts:
+      replace_this_with_server3_domain_or_ip:
+        node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
 
-        replace_this_with_server4_domain_or_ip:
-          node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
+      replace_this_with_server4_domain_or_ip:
+        node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
   vars:
     mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
     gas_price: 'GAS PRICE'
