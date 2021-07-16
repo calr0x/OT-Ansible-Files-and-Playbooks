@@ -48,7 +48,7 @@
         owner: root
         group: root
         
-    - name: Delete existing monitor (docker check) schedule from cron
+    - name: Delete existing monitor (disk check) schedule from cron
       cron:
         name: Monitor Disk Check
         state: absent
