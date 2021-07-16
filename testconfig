@@ -1,0 +1,56 @@
+[existingservers]
+host1 node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS' op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY' op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY' initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+host2 node_name: : 'SERVER NAME IN TELEGRAM NOTIFICATIONS' op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY' op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY' initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+
+[newservers]
+host3 node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS' op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY' op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY' initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+host4 node_name: : 'SERVER NAME IN TELEGRAM NOTIFICATIONS' op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY' op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY' initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
+
+############## GLOBAL OT NODE VARIABLES ##################
+mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
+gas_price: 'GAS PRICE'
+dh_price_factor: 'GLOBALDHPRICEFACTOR'
+dh_max_holding_time_in_minutes: 'GLOBALMAXHOLDINGTIME'
+
+############## GLOBAL AWS VARIABLES ######################
+aws_access_key_id: 'GLOBALAWSACCESSKEY'
+aws_secret_access_key: 'GLOBALAWSSECRETKEY'
+ 
+############## GLOBAL TELEGRAM VARIABLES #################
+telegram_bot_token: 'GLOBALTELEGRAMBOTTOKEN'
+telegram_chat_id: 'GLOBALTELEGRAMCHATID'
+
+############## GLOBAL SMOOTHBRAIN VARIABLES ##############
+backup_minute: '0' # Backups every 6 hours starting midnight, consult https://crontab.guru/ for help in this section
+backup_hour: '*/6'
+backup_day: '*'
+backup_month: '*'
+backup_weekday: '*'
+
+############## GLOBAL NODEWATCH VARIABLES ################
+bid_check_minute: '*/60' # Checks every hour
+bid_check_hour: '*'
+bid_check_day: '*'
+bid_check_month: '*'
+bid_check_weekday: '*'
+disk_check_minute: '*/60' # Checks every hour
+disk_check_hour: '*'
+disk_check_day: '*'
+disk_check_month: '*'
+disk_check_weekday: '*'
+
+############## GLOBAL ANSIBLE VARIABLES ##################
+daily_server_restart_minute: '0' # Restarts every day at midnight
+daily_server_restart_hour: '*'
+daily_server_restart_day: '*'
+daily_server_restart_month: '*'
+daily_server_restart_weekday: '*'
+add_user_username: USERNAME_TO_ADD # Add new sudo user account to Ubuntu and disable root account
+add_user_encrypted_password: ENCRYPTED_PASS
+add_user_ssh_key: SSH_KEY # (FORMAT SHOULD BE "ssh-rsa_COPY_PUBLIC_KEY_HERE")
+timezone: YOUR_LOCAL_TIMEZONE_HERE # To list the timezone : timedatectl list-timezones
+copy_paste_source: YOUR_SOURCE_PATH_HERE_WITH_FILENAME_INCLUDED
+copy_paste_destination: YOUR_DESTINATION_PATH_HERE
+install_app_application_name: APPLICATION_NAME
+remove_app_application_name: APPLICATION_NAME
+set_log_size_limit: 50M
