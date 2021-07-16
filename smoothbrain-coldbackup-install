@@ -9,8 +9,7 @@
 # 5. Execute a COLD backup.
 
 - name: Install and configure Restic backups for OriginTrail nodes...
-  hosts: otnodes
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
+  hosts: all
   gather_facts: no
 
   tasks:
@@ -63,7 +62,7 @@
       day: '{{ backup_day }}'
       month: '{{ backup_month }}'
       weekday: '{{ backup_weekday }}'
-    job: "/root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh"
+      job: "/root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh"
 
   - name: Execute initial cold backup
     shell: /root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh
