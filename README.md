@@ -112,9 +112,9 @@ ctrl+x
 ## __Testing your configuration :__
 The next step will send your working config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
 
-__If you ever modify your hosts-config file, make sure you repeat the previous step to correct the ansible host file.__
+__If you ever modify your hosts-config file, make sure you repeat the following step to correct the ansible host file.__
 ```
-rm /etc/ansible/hosts && cp hosts-config /etc/ansible/hosts
+cp hosts-config /etc/ansible/hosts
 ```
 
 The following command should generate a server tree
