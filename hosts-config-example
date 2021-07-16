@@ -22,17 +22,17 @@ all:
         node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
   vars:
 
-############## GLOBAL OT NODE VARIABLES ##############
+############## GLOBAL OT NODE VARIABLES ##################
     mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
     gas_price: 'GAS PRICE'
     dh_price_factor: 'GLOBALDHPRICEFACTOR'
     dh_max_holding_time_in_minutes: 'GLOBALMAXHOLDINGTIME'
 
-############## GLOBAL AWS VARIABLES ##############
+############## GLOBAL AWS VARIABLES ######################
     aws_access_key_id: 'GLOBALAWSACCESSKEY'
     aws_secret_access_key: 'GLOBALAWSSECRETKEY'
  
-############## GLOBAL TELEGRAM VARIABLES ##############
+############## GLOBAL TELEGRAM VARIABLES #################
     telegram_bot_token: 'GLOBALTELEGRAMBOTTOKEN'
     telegram_chat_id: 'GLOBALTELEGRAMCHATID'
 
@@ -43,7 +43,7 @@ all:
     backup_month: '*'
     backup_weekday: '*'
 
-############## GLOBAL NODEWATCH VARIABLES ##############
+############## GLOBAL NODEWATCH VARIABLES ################
     bid_check_minute: '*/60' # Checks every hour
     bid_check_hour: '*'
     bid_check_day: '*'
@@ -54,6 +54,8 @@ all:
     disk_check_day: '*'
     disk_check_month: '*'
     disk_check_weekday: '*'
+
+############## GLOBAL ANSIBLE VARIABLES ##################
     daily_server_restart_minute: '0' # Restarts every day at midnight
     daily_server_restart_hour: '*'
     daily_server_restart_day: '*'
