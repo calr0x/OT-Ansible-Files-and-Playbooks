@@ -52,13 +52,13 @@
       mode: '0755'
 
   - name: Add backup schedule to cron (every 6 hours)
-      cron:
-        name: "restic backup"
-        minute: '{{ backup_minute }}'
-        hour: '{{ backup_hour }}'
-        day: '{{ backup_day }}'
-        month: '{{ backup_month }}'
-        weekday: '{{ backup_weekday }}'
+    cron:
+      name: "restic backup"
+      minute: '{{ backup_minute }}'
+      hour: '{{ backup_hour }}'
+      day: '{{ backup_day }}'
+      month: '{{ backup_month }}'
+      weekday: '{{ backup_weekday }}'
       job: "/root/OT-Smoothbrain-Backup/restic-backup.sh"
 
   - name: Stop Cosmic_Overlay backup script (if present)
