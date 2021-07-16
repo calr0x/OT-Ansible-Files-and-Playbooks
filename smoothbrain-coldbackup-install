@@ -1,17 +1,15 @@
 ---
 
-# This playbook will install and automate restic backup on all your servers. 
+# This playbook will install and automate restic COLD backup on all your servers. 
 # It will:
 # 1. Delete the exsiting OT-Smoothbrain-Backup and OT-Settings folders
 # 2. Clone OT-Smoothbrain-Backup and OT-Settings git repositories back
 # 3. Copy the edited config
 # 4. Add backup schedule every 6 hours (changeable in hosts-config)
-# 5. Stop Cosmic_Overlay AWS backup script if running.
-# 6. Execute a backup.
+# 5. Execute a COLD backup.
 
 - name: Install and configure Restic backups for OriginTrail nodes...
   hosts: all
-  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
@@ -51,21 +49,20 @@
       dest: /usr/local/bin
       mode: '0755'
 
-  - name: Add backup schedule to cron (every 6 hours)
+  - name: Delete old Cron jobs
     cron:
       name: "restic backup"
+      state: absent
+
+  - name: Add backup schedule to cron (every 6 hours)
+    cron:
+      name: "restic cold backup"
       minute: '{{ backup_minute }}'
       hour: '{{ backup_hour }}'
       day: '{{ backup_day }}'
       month: '{{ backup_month }}'
       weekday: '{{ backup_weekday }}'
-      job: "/root/OT-Smoothbrain-Backup/restic-backup.sh"
+      job: "/root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh"
 
-  - name: Stop Cosmic_Overlay backup script (if present)
-    ignore_errors: yes
-    command:
-      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
-      cmd: forever stop awsbackup.js
-
-  - name: Execute initial backup
-    shell: /root/OT-Smoothbrain-Backup/restic-backup.sh
+  - name: Execute initial cold backup
+    shell: /root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh
