@@ -31,13 +31,19 @@ all:
 ############## GLOBAL AWS VARIABLES ##############
     aws_access_key_id: 'GLOBALAWSACCESSKEY'
     aws_secret_access_key: 'GLOBALAWSSECRETKEY'
+ 
+############## GLOBAL TELEGRAM VARIABLES ##############
     telegram_bot_token: 'GLOBALTELEGRAMBOTTOKEN'
     telegram_chat_id: 'GLOBALTELEGRAMCHATID'
+
+############## GLOBAL SMOOTHBRAIN VARIABLES ##############
     backup_minute: '0' # Backups every 6 hours starting midnight, consult https://crontab.guru/ for help in this section
     backup_hour: '*/6'
     backup_day: '*'
     backup_month: '*'
     backup_weekday: '*'
+
+############## GLOBAL NODEWATCH VARIABLES ##############
     bid_check_minute: '*/60' # Checks every hour
     bid_check_hour: '*'
     bid_check_day: '*'
@@ -48,11 +54,11 @@ all:
     disk_check_day: '*'
     disk_check_month: '*'
     disk_check_weekday: '*'
-    restart_minute: '0' # Restarts every day at midnight
-    restart_hour: '*'
-    restart_day: '*'
-    restart_month: '*'
-    restart_weekday: '*'
+    daily_server_restart_minute: '0' # Restarts every day at midnight
+    daily_server_restart_hour: '*'
+    daily_server_restart_day: '*'
+    daily_server_restart_month: '*'
+    daily_server_restart_weekday: '*'
     add_user_username: USERNAME_TO_ADD # Add new sudo user account to Ubuntu and disable root account
     add_user_encrypted_password: ENCRYPTED_PASS
     add_user_ssh_key: SSH_KEY # (FORMAT SHOULD BE "ssh-rsa_COPY_PUBLIC_KEY_HERE")

@@ -3,7 +3,7 @@
 # This module will change your server's timezone to your local timezone
 
 - name: Change time on Ubuntu servers to localtime
-  hosts: otnodes
+  hosts: all
   gather_facts: no
 
   tasks:

@@ -3,7 +3,7 @@
 # This module will first prune the logs to a user-defined size and will limit future logs to that same size. Journalctl will auto delete beyond this size automatically.
 
 - name: Limit journalctl log size to user-set value
-  hosts: otnodes
+  hosts: all
   gather_facts: no
 
   tasks:

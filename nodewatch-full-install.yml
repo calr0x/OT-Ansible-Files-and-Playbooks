@@ -17,7 +17,7 @@
 # 5. Add cron jobs for both with current configured values.
 
 - name: Install Monitors
-  hosts: otnodes
+  hosts: all
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 

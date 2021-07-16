@@ -1,6 +1,6 @@
 ---
 - name: Configure Ubuntu and Install Cosmic Installer
-  hosts: otnodes
+  hosts: all
   gather_facts: yes
 
   tasks:

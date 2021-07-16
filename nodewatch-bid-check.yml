@@ -8,7 +8,7 @@
 # All "bid_check" entries on OT-Settings/config.sh
 
 - name: Install Monitors
-  hosts: otnodes
+  hosts: all
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 

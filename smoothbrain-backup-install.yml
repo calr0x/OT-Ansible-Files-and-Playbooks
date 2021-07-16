@@ -10,7 +10,7 @@
 # 6. Execute a backup.
 
 - name: Install and configure Restic backups for OriginTrail nodes...
-  hosts: otnodes
+  hosts: all
   vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
