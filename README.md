@@ -146,7 +146,9 @@ This module will return *pong* on successful contact with your servers. If there
 ```
 ansible-playbook NAME_OF_MODULE.yml
 ```
-The above command will be how every Ansible module will be ran from now on if you are logged in as root on the node servers with an SSH key. 
+### __Please take your time to read all commented out info inside each Ansible playbook file before running them, you can use nano command to consult them__
+
+The previous command will be how every Ansible module will be ran from now on if you are logged in as root on the node servers with an SSH key. 
 
 ## __Specifications:__
 

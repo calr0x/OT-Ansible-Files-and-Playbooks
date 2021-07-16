@@ -1,4 +1,10 @@
 ---
+# This playbook is designed to be an all-in-one solution for a new dockerless node creation
+# OT-Ansible and OT-Settings instructions MUST BE followed before attempting this
+# This also includes OT-NodeWatch and OT-Smoothbrain-Backup setups and automation
+#
+# This still requires testing, please hold before trying
+#
 - name: Configure Ubuntu and Install new dockerless otnodes
   hosts: newnodes
   gather_facts: yes
