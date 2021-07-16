@@ -21,10 +21,14 @@ all:
       replace_this_with_server4_domain_or_ip:
         node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
   vars:
+
+############## GLOBAL OT NODE VARIABLES ##############
     mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
     gas_price: 'GAS PRICE'
     dh_price_factor: 'GLOBALDHPRICEFACTOR'
     dh_max_holding_time_in_minutes: 'GLOBALMAXHOLDINGTIME'
+
+############## GLOBAL AWS VARIABLES ##############
     aws_access_key_id: 'GLOBALAWSACCESSKEY'
     aws_secret_access_key: 'GLOBALAWSSECRETKEY'
     telegram_bot_token: 'GLOBALTELEGRAMBOTTOKEN'
