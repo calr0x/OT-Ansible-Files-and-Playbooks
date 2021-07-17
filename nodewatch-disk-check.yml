@@ -40,13 +40,6 @@
         owner: root
         group: root
         mode: '0600'
-
-    - name: Install disk_check.sh
-      copy:
-        src: ~/OT-NodeWatch/disk_check.sh
-        dest: /root/OT-NodeWatch/disk_check.sh
-        owner: root
-        group: root
         
     - name: Delete existing monitor (disk check) schedule from cron
       cron:
