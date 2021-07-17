@@ -62,7 +62,7 @@
       day: '{{ backup_day }}'
       month: '{{ backup_month }}'
       weekday: '{{ backup_weekday }}'
-      job: "/root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh"
+      job: "/root/OT-Smoothbrain-Backup/restic-coldbrain-backup.sh"
 
   - name: Execute initial cold backup
-    shell: /root/OT-Smoothbrain-Backup/coldbackup/restic-coldbrain-dockerless.sh
+    shell: /root/OT-Smoothbrain-Backup/restic-coldbrain-backup.sh
