@@ -10,9 +10,9 @@ You can setup one, two, or *hundreds* of servers at the same time and monitor th
   -  Look into VirtualBox https://www.virtualbox.org/, a Raspberry Pi or rent a distinct budget server
 - Requires PYTHON3 on control computer
   - A workaround is possible for Raspberry Pis running Python 2.7
-- Requires the repo OT-Settings https://github.com/calr0x/OT-Settings as many playbooks require data from the config.sh in OT-Settings
-  - Follow the instructions there to setup config.sh
-  - Other repos such as OT-Smoothbrain-Backup, OT-NodeWatch, OT-Docksucker will be installed by the playbooks automatically if required
+- Requires the repo __OT-Settings__ https://github.com/calr0x/OT-Settings as many playbooks require data from the config.sh in OT-Settings
+  - Follow the instructions on OT-Settings to setup config.sh
+  - Other repos such as OT-Smoothbrain-Backup, OT-NodeWatch, OT-Docksucker will be installed when needed by the playbooks
 
 ## __Installing the repository :__
 Let's begin by getting the repository to your local root directory
@@ -27,7 +27,7 @@ cd OT-Ansible-Files-and-Playbooks
 ```
 Next, we want to make a local copy of the hosts-config-example file and name it __hosts-config__. 
 
-You do not want to apply changes to config-otnode-ansible-original.yml file since this will be modified every time you want to git pull (ak update) your repository.
+You do not want to apply changes to hosts-config-example file since this will be modified every time you want to git pull (ak update) your repository.
 ```
 cp hosts-config-example hosts-config
 ```
@@ -35,7 +35,7 @@ Remember that you want to make all changes to __hosts-config__ and not hosts-con
 ```
 nano hosts-config
 ```
-You have the option to modify the hosts-config using nano, but I strongly suggest copying the content and using notepad to modify the variables as there are many of them. 
+You have the option to modify the hosts-config using nano, but I strongly suggest copying the content somewher else to modify the variables as there are many of them. If you do, make sure you respect all spaces and indentations.
 
 ## __Changing the config file :__
 You need as many of the below sections as the number of nodes you are setting up. Only two sections for two nodes are included in the template to demonstrate spacing between them. 
@@ -44,18 +44,16 @@ __Indentations are incredibly important.__ Make sure the sections you add line u
 
 There are __(4)__ spaces __before__ "replace" and __(2)__ spaces __between__ "node_name" and "replace" (6 total from left edge)
 
-    replace_this_with_server1_domain_or_ip: #Exp. node1.server.com OR 23.34.45.56
+    replace_this_with_server1_domain_or_ip:
       node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
       op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
       op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
-      mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
       initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
 
-    replace_this_with_server1_domain_or_ip: #Exp. node2.server.com OR 23.34.45.57
+    replace_this_with_server1_domain_or_ip:
       node_name: 'SERVER NAME IN TELEGRAM NOTIFICATIONS'
       op_pub_key: 'OPERATIONAL WALLET PUBLLIC KEY'
       op_priv_key: 'OPERATIONAL WALLET PRIVATE KEY'
-      mgmt_pub_key: 'MANAGEMENT WALLET PUBLIC KEY'
       initial_deposit_amount: 'INITIAL DEPOSIT AMOUNT'
 
 Here is an example :
@@ -96,13 +94,13 @@ Edit each "replace_this_with_server1_domain_or_ip" with either the domain or IP 
 
 Edit each variable inside the single quotes. Syntax is very important so make sure to keep the single quotes on each side at the end.
 
-The "newnodes" section is for the creation of new dockerless nodes, which requires more information.
+The "newnodes" section is for the creation of new dockerless nodes, which requires a bit more information. If you are not creating new nodes, you should delete *newnodes* all the way to the line above *existingnodes*, use ctrl + k to clear those lines in between. 
 
 The "existingnodes" section is to integrate your current nodes into ansible and other monitoring scripts, which only requires a node name and IP.
 
-If you used notepad to modify the config, press ctrl+k repeatedly on the config to delete every line from the template and paste the content of your notepad
+If you used a notepad (or other text editor) to modify the config, press ctrl+k repeatedly on the nano hosts-config to delete every line from the template and paste the content of your text editor
 
-If not, when you are done, press
+When you are done, press
 ```
 ctrl+s
 ```
@@ -110,14 +108,14 @@ ctrl+s
 ctrl+x
 ```
 ## __Testing your configuration :__
-The next step will send your working config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
+The next step will send your hosts-config file to the ansible host file, which will be sourced for all future Ansible module deployments. 
 
 __If you ever modify your hosts-config file, make sure you repeat the following step to correct the ansible host file.__
 ```
 cp hosts-config /etc/ansible/hosts
 ```
 
-The following command should generate a server tree
+For testing purposes, if you entered your variables correctly on the hosts-config file, the following command should generate a server tree
 ```
 ansible-inventory --graph
 ```
