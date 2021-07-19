@@ -12,15 +12,10 @@
 
   - name: Delete old Restic cron jobs
     cron:
-      name: "Ansible: restic backup"
-      state: absent
-
-  - name: Delete old Smoothbrain cron jobs
-    cron:
-      name: "Ansible: Smoothbrain backup"
+      name: "restic backup"
       state: absent
 
   - name: Delete old Coldbrain cron jobs
     cron:
-      name: "Ansible: Smoothbrain backup"
+      name: "Smoothbrain backup"
       state: absent
