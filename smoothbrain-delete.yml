@@ -16,6 +16,6 @@
       state: absent
 
   - name: Delete old Cron jobs
-      cron:
-        name: "Ansible: Smoothbrain backup"
-        state: absent
+    cron:
+      name: "Ansible: Smoothbrain backup"
+      state: absent
