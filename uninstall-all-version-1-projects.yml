@@ -25,6 +25,11 @@
       path: /root/OT-NodeWatch
       state: absent
 
+  - name: Delete /root/OT-Settings directory
+    file:
+      path: /root/OT-Settings
+      state: absent
+
   - name: Delete /root/OT-Ansible-Files-and-Playbooks directory
     file:
       path: /root/OT-Ansible-Files-and-Playbooks
