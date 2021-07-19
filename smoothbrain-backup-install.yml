@@ -61,11 +61,5 @@
       weekday: '{{ backup_weekday }}'
       job: "/root/OT-Smoothbrain-Backup/restic-backup.sh"
 
-  - name: Stop Cosmic_Overlay backup script (if present)
-    ignore_errors: yes
-    command:
-      chdir: /root/Cosmic_OverlayV2/cron-jobs-node
-      cmd: forever stop awsbackup.js
-
   - name: Execute initial backup
     shell: /root/OT-Smoothbrain-Backup/restic-backup.sh
