@@ -19,3 +19,8 @@
     cron:
       name: "Smoothbrain backup"
       state: absent
+
+  - name: Delete old Coldbrain cron jobs
+    cron:
+      name: "restic cold backup"
+      state: absent
