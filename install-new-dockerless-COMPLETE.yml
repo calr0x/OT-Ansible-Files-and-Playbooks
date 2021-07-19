@@ -6,7 +6,7 @@
 # This still requires testing, please hold before trying
 #
 - name: Configure Ubuntu and Install new dockerless otnodes
-  hosts: newnodes
+  hosts: all
   gather_facts: yes
 
   - name: Make /root directory

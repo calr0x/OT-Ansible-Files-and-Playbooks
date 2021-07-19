@@ -51,12 +51,12 @@
 
   - name: Delete old Cron jobs
     cron:
-      name: "restic backup"
+      name: "Smoothbrain Backup"
       state: absent
 
   - name: Add backup schedule to cron (every 6 hours)
     cron:
-      name: "restic cold backup"
+      name: "Smoothbrain Backup"
       minute: '{{ backup_minute }}'
       hour: '{{ backup_hour }}'
       day: '{{ backup_day }}'

@@ -5,7 +5,7 @@
 # ansible-playbook -u root -k -i /etc/ansible/hostsCONVERT convert-to-docksucker.yml
 
 - name: Convert existing nodes to DockSucker
-  hosts: existingnodes
+  hosts: all
   gather_facts: yes
 
   tasks:
