@@ -15,6 +15,11 @@
       name: "restic backup"
       state: absent
 
+  - name: Delete old Restic cron jobs
+    cron:
+      name: "Restic backup"
+      state: absent
+
   - name: Delete old Coldbrain cron jobs
     cron:
       name: "Smoothbrain backup"
