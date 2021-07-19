@@ -54,9 +54,14 @@
       name: "restic backup"
       state: absent
 
+  - name: Delete old Cron jobs
+    cron:
+      name: "Ansible: Smoothbrain backup"
+      state: absent
+
   - name: Add backup schedule to cron (every 6 hours)
     cron:
-      name: "restic cold backup"
+      name: "Ansible: Smoothbrain backup"
       minute: '{{ backup_minute }}'
       hour: '{{ backup_hour }}'
       day: '{{ backup_day }}'

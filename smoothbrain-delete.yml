@@ -10,12 +10,17 @@
       path: /root/OT-Smoothbrain-Backup
       state: absent
 
-  - name: Delete old Cron jobs
+  - name: Delete old Restic cron jobs
     cron:
       name: "Ansible: restic backup"
       state: absent
 
-  - name: Delete old Cron jobs
+  - name: Delete old Smoothbrain cron jobs
+    cron:
+      name: "Ansible: Smoothbrain backup"
+      state: absent
+
+  - name: Delete old Coldbrain cron jobs
     cron:
       name: "Ansible: Smoothbrain backup"
       state: absent
