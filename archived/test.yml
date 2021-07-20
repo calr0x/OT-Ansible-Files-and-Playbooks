@@ -1,0 +1,13 @@
+---
+- name: Test shell stuff
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+  - name: Copy node config file to server
+    copy:
+      src: ~/OT-Ansible-Files-and-Playbooks/data/node_config.json
+      dest: /root/Cosmic_OverlayV2/configurations
+      owner: root
+      group: root
+      mode: '0600'
