@@ -52,5 +52,4 @@
     environment:
       HOSTNAME: {{ ansible_hostname }}
       VERSION: {{ ansible_lsb }}
-      {{ ansible_default_ipv4.address }}
       
