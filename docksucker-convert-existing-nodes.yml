@@ -49,6 +49,3 @@
     shell: /root/OT-DockSucker/install-from-existing.sh >> OUTPUT
     args:
       chdir: /root/OT-DockSucker/
-    environment:
-      HOSTNAME: "{{ ansible_hostname }}"
-      VERSION: "{{ ansible_lsb }}"
