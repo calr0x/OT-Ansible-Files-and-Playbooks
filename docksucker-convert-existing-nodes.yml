@@ -50,6 +50,7 @@
     args:
       chdir: /root/OT-DockSucker/
     environment:
-      HOSTNAME: "{{ ansible_facts['ansible_hostname'] }}"
-      VERSION: "{{ ansible_facts['lsb']['release'] }}"
+      HOSTNAME: {{ ansible_hostname }}
+      VERSION: {{ ansible_lsb }}
+      {{ ansible_default_ipv4.address }}
       
