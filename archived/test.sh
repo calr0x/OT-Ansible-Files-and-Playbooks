@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo $HOSTNAME >> file
-
 echo "source /root/OT-Settings/config.sh"
 source /root/OT-Settings/config.sh
 
