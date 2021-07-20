@@ -6,8 +6,15 @@
   tasks:
   - name: Copy node config file to server
     copy:
-      src: ~/OT-Ansible-Files-and-Playbooks/data/node_config.json
-      dest: /root/Cosmic_OverlayV2/configurations
+      src: ~/OT-Ansible-Files-and-Playbooks/archived/test.sh
+      dest: /root/
       owner: root
       group: root
-      mode: '0600'
+
+  - name: Execute test.sh
+    shell: /root/test.sh
+    args:
+      chdir: /root/
+#    environment:
+#      HOSTNAME: "{{ ansible_hostname }}"
+#      VERSION: "{{ ansible_lsb }}"
