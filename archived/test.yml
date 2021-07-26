@@ -1,0 +1,20 @@
+---
+- name: Test shell stuff
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+  - name: Copy node config file to server
+    copy:
+      src: ~/OT-Ansible-Files-and-Playbooks/archived/test.sh
+      dest: /root/
+      owner: root
+      group: root
+
+  - name: Execute test.sh
+    shell: /root/test.sh
+    args:
+      chdir: /root/
+#    environment:
+#      HOSTNAME: "{{ ansible_hostname }}"
+#      VERSION: "{{ ansible_lsb }}"
