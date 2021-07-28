@@ -4,7 +4,7 @@
 
 - name: Claim/reclaim a Netdata client
   hosts: all
-  vars_files: "config.yml"
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
   gather_facts: no
 
   tasks:
