@@ -31,5 +31,5 @@
       register: ssh_key_values
 
     - name: Send the public key to the Smoothbrain server
-      command: sshpass -p {{ smoothbrain_server_user_pass }} ssh-copy-id -p 22022 -i /root/.ssh/id_ecdsa.pub -o StrictHostKeyChecking=no {{smoothbrain_server_user}}@{{smoothbrain_server_ip}}
+      command: sshpass -p {{ smoothbrain_server_user_pass }} ssh-copy-id -p {{smoothbrain_server_port}} -i /root/.ssh/id_ecdsa.pub -o StrictHostKeyChecking=no {{smoothbrain_server_user}}@{{smoothbrain_server_ip}}
         
