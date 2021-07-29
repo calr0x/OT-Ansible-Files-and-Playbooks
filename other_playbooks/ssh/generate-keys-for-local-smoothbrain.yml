@@ -9,6 +9,12 @@
   gather_facts: yes
 
   tasks:
+    - name: Create /root/.ssh directory
+      file:
+        path: /root/.ssh
+        state: present
+        mode: '700'
+
     - name: Create new SSH keys
       openssh_keypair:
         path: ~/.ssh/id_ecdsa
