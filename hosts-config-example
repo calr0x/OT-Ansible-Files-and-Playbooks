@@ -56,6 +56,8 @@ otnodes:
     add_user_username: USERNAME_TO_ADD # Add new sudo user account to Ubuntu and disable root account
     add_user_encrypted_password: ENCRYPTED_PASS
     add_user_ssh_key: SSH_KEY # (FORMAT SHOULD BE "ssh-rsa_COPY_PUBLIC_KEY_HERE")
+    smoothbrain_server_ip: 'SMOOTHBRAIN_SERVER_IP'
+    smoothbrain_server_user: 'root'
     timezone: YOUR_LOCAL_TIMEZONE_HERE # To list the timezone : timedatectl list-timezones
     copy_paste_source: YOUR_SOURCE_PATH_HERE_WITH_FILENAME_INCLUDED
     copy_paste_destination: YOUR_DESTINATION_PATH_HERE

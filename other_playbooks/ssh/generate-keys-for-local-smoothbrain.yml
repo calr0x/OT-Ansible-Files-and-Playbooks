@@ -1,0 +1,24 @@
+---
+
+# This module will create a new passwordless sshkey on each server and send that public key to the backup server
+# SETTING TO CHANGE IN CONFIG:
+# smoothbrain_server_ip: 'SMOOTHBRAIN_SERVER_IP' Put the IP/domain of your smoothbrain server here.
+
+- name: Create SSH keys and send to Smoothbrain server
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Create new SSH keys
+      openssh_keypair:
+        name: ~/.ssh/id_ecdsa
+        type: ecdsa
+        size: 521
+        state: present
+      register: ssh_key_values
+
+    - name: Send the public key to the Smoothbrain server
+      authorized_key:
+        user: '{{ smoothbrain_server_user }}'
+        state: present
+        key: ssh_key_values.public_key
