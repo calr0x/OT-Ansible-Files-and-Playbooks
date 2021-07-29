@@ -3,6 +3,9 @@
 # This module will create a new passwordless sshkey on each server and send that public key to the backup server
 # SETTING TO CHANGE IN CONFIG:
 # smoothbrain_server_ip: 'SMOOTHBRAIN_SERVER_IP' Put the IP/domain of your smoothbrain server here.
+# smoothbrain_server_user: 'USERNAME'
+# smoothbrain_server_user_pass: 'USERNAME_PASS'
+# smoothbrain_server_port: '22' # Only change if you know you changed the SSH port
 
 - name: Create SSH keys and send to Smoothbrain server
   hosts: all
