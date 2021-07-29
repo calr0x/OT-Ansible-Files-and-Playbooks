@@ -16,10 +16,10 @@
         mode: '700'
     
     - name: Installing sshpass
-        apt:
-          name: sshpass
-          state: present
-          update_cache: yes
+      apt:
+        name: sshpass
+        state: present
+        update_cache: yes
 
     - name: Create new SSH keys
       openssh_keypair:
