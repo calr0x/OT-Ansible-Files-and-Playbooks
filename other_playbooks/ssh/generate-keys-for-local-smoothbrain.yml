@@ -27,6 +27,7 @@
         type: ecdsa
         size: 521
         state: present
+        comment: '{{ node_name }}'
       register: ssh_key_values
 
     - name: Send the public key to the Smoothbrain server
