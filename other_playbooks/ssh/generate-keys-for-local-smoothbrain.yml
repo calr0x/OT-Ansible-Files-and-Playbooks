@@ -12,7 +12,7 @@
     - name: Create /root/.ssh directory
       file:
         path: /root/.ssh
-        state: present
+        state: directory
         mode: '700'
 
     - name: Create new SSH keys
