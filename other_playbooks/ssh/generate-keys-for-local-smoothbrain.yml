@@ -18,7 +18,5 @@
       register: ssh_key_values
 
     - name: Send the public key to the Smoothbrain server
-      authorized_key:
-        user: '{{ smoothbrain_server_user }}'
-        state: present
-        key: ssh_key_values.public_key
+      command: sshpass -p {{ smoothbrain_server_user_pass }} ssh-copy-id -i /home/{{smoothbrain_server_user}}/.ssh/ecdsa.pub -o StrictHostKeyChecking=no {{smoothbrain_server_user}}@{{smoothbrain_server_ip}}
+        
