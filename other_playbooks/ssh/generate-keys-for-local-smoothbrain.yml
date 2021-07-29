@@ -11,7 +11,6 @@
   tasks:
     - name: Create new SSH keys
       openssh_keypair:
-        name: ~/.ssh/id_ecdsa
         type: ecdsa
         size: 521
         state: present
