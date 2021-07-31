@@ -1,0 +1,64 @@
+---
+
+# This playbook will install and automate restic backup on all your docker servers. 
+# It will:
+# 1. Delete the exsiting OT-Smoothbrain-Backup and OT-Settings folders
+# 2. Clone OT-Smoothbrain-Backup and OT-Settings git repositories back
+# 3. Copy the edited config
+# 4. Add backup schedule every 6 hours (changeable in hosts-config)
+# 6. Execute a backup.
+
+- name: Install and configure Restic backups for OriginTrail nodes...
+  hosts: all
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
+  gather_facts: no
+
+  tasks:
+  - name: Delete existing OT-Smoothbrain-Backup folder
+    file:
+      path: /root/OT-Smoothbrain-Backup
+      state: absent
+  
+  - name: Delete existing OT-Settings folder
+    file:
+      path: /root/OT-Settings
+      state: absent
+
+  - name: Clone OT-Smoothbrain-Backup git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-Smoothbrain-Backup.git'
+      dest: /root/OT-Smoothbrain-Backup
+      force: yes
+
+  - name: Clone OT-Settings git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-Settings.git'
+      dest: /root/OT-Settings
+      force: yes
+
+  - name: Copy config file
+    copy:
+      src: /root/OT-Settings/config.sh
+      dest: /root/OT-Settings
+      owner: root
+      group: root
+      mode: '0700'
+
+  - name: Copy restic file
+    copy:
+      src: /root/OT-Smoothbrain-Backup/restic
+      dest: /usr/local/bin
+      mode: '0755'
+
+  - name: Add backup schedule to cron (every 6 hours)
+    cron:
+      name: "restic backup"
+      minute: '{{ backup_minute }}'
+      hour: '{{ backup_hour }}'
+      day: '{{ backup_day }}'
+      month: '{{ backup_month }}'
+      weekday: '{{ backup_weekday }}'
+      job: "/root/OT-Smoothbrain-Backup/restic-backup.sh"
+
+  - name: Execute initial backup
+    shell: /root/OT-Smoothbrain-Backup/restic-docker-backup.sh
