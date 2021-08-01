@@ -58,7 +58,7 @@
       day: '{{ backup_day }}'
       month: '{{ backup_month }}'
       weekday: '{{ backup_weekday }}'
-      job: "/root/OT-Smoothbrain-Backup/restic-backup.sh"
+      job: "/root/OT-Smoothbrain-Backup/restic-docker-backup.sh"
 
   - name: Execute initial backup
     shell: /root/OT-Smoothbrain-Backup/restic-docker-backup.sh
