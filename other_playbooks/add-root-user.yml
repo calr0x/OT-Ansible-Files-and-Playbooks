@@ -1,0 +1,36 @@
+---
+
+- name: Add root user account to Ubuntu
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Add public key to user's .ssh/authorized_keys file
+      authorized_key:
+        user: root
+        state: present
+        manage_dir: yes
+        key: '{{ add_user_ssh_key }}'
+
+    - name: Enable root to login
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: '#?PermitRootLogin .+'
+        replace: 'PermitRootLogin prohibit-password'
+
+    - name: Disable use of passwords
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: '#?PasswordAuthentication .+'
+        replace: 'PasswordAuthentication no'
+
+    - name: Force use of private keys
+      replace:
+        path: /etc/ssh/sshd_config
+        regexp: '#?PubkeyAuthentication .+'
+        replace: 'PubkeyAuthentication yes'
+
+    - name: Restart SSH daemon
+      service:
+        name: sshd
+        state: restarted
