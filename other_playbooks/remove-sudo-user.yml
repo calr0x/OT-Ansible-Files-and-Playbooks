@@ -10,8 +10,8 @@
   gather_facts: no
 
   tasks:
-    - name: Create new user account
+    - name: Delete user account
       user:
-        name: kwallanodes
+        name: '{{ add_user_username }}'
         state: absent
         remove: yes
