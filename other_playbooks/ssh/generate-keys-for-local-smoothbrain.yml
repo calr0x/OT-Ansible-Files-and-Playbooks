@@ -23,16 +23,7 @@
         name: sshpass
         state: present
         update_cache: yes
-  
-    - name: Remove existing private key
-      file:
-        path: /root/.ssh/id_ecdsa
-        state: absent
 
-    - name: Remove existing public key
-      file:
-        path: /root/.ssh/id_ecdsa.pub
-        state: absent
 
     - name: Create new SSH keys
       openssh_keypair:
@@ -40,7 +31,7 @@
         type: ecdsa
         size: 521
         state: present
-        comment: '{{ node_name }}'
+        comment: '{{ ansible_facts['ansible_hostname'] }}'
       register: ssh_key_values
 
     - name: Send the public key to the Smoothbrain server
