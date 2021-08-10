@@ -40,7 +40,7 @@
         type: ecdsa
         size: 521
         state: present
-        comment: '{{ ansible_facts['ansible_hostname'] }}'
+        comment: '{{ ansible_hostname }}'
       register: ssh_key_values
 
     - name: Send the public key to the Smoothbrain server
