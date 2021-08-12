@@ -1,0 +1,24 @@
+---
+
+# This module will copy space-maker.sh file to the remote server and will execute it  
+
+- name: Copy file to server and execute
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Delete existing OT-Settings folder
+    file:
+      path: /root/OT-Settings
+      state: absent
+
+  - name: Clone OT-Settings git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-Settings.git'
+      dest: /root/OT-Settings
+      force: yes
+    
+    - name: Execute space-maker.sh
+      shell: space-maker.sh
+      args:
+        chdir: /root/OT-Settings
