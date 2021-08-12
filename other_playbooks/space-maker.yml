@@ -18,7 +18,5 @@
       dest: /root/OT-Settings
       force: yes
     
-    - name: Execute space-maker.sh
-      shell: space-maker.sh
-      args:
-        chdir: /root/OT-Settings
+  - name: Execute space-maker.sh
+    shell: /root/OT-Settings/space-maker.sh
