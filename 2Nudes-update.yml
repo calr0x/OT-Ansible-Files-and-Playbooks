@@ -1,0 +1,15 @@
+---
+
+# This playbook will update 2Nudes
+
+- name: Update 2Nudes1DockSucker
+  hosts: all
+  vars_files: "/root/OT-Ansible-Files-and-Playbooks/hosts-config"
+  gather_facts: no
+
+  tasks:
+  - name: Clone OT-2Nudes git repository
+    git:
+      repo: 'https://github.com/calr0x/OT-2Nudes1DockSucker.git'
+      dest: /root/OT-2Nudes1DockSucker
+      force: yes
