@@ -7,9 +7,6 @@
   gather_facts: no
 
   tasks:
-    - name: Prune existing logs
-      command: journalctl --vacuum-size='{{ set_log_size_limit }}'
-
     - name: Set limit of journalctl log
       replace:
         path: /etc/systemd/journald.conf
